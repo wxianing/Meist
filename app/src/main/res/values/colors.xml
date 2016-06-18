@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="action_bar">#FFFFFF</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#FFC93437</color>
+    <color name="blue">#FF375BF1</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="green">#FF34A350</color>
+    <color name="default_bg_color">#EEF2F3</color>
+
+    <!-- base color -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="full_black">#000000</color>
+    <color name="black">#282828</color>
+    <color name="light_white">#f9f9f9</color>
+
+    <!-- 设置 -->
+    <color name="setting_text_color">#555555</color>
+    <color name="setting_third_user_textcolor">#273545</color>
+
+    <!-- 登录 -->
+    <color name="login_divider_bg_color">#6b88b5</color>
+    <color name="login_other_divider">#84a7d3</color>
+    <color name="login_other_textcolor">#bac6d6</color>
+
+    <!--  -->
+    <color name="activity_bg_color">#f0f2f5</color>
+    <color name="head_bg_color">#087CF5</color>
+    <color name="gray_textcolor">#7a7a7a</color>
+    <color name="light_gray_textcolor">#7c7c7c</color>
+    <color name="divider_bg_color">#dbdbdb</color>
+
+    <!-- 学生首页 -->
+    <color name="system_msg_bg_color">#8f81f1</color>
+    <color name="my_teacher_bg_color">#49cd7e</color>
+    <color name="my_score_bg_color">#3982e6</color>
+    <color name="my_datum_bg_color">#fbac4f</color>
+    <color name="my_plan_bg_color">#8dde74</color>
+    <color name="my_choose_school_bg_color">#fad75a</color>
+    <color name="my_writ_bg_color">#49c0e8</color>
+    <color name="my_complain_bg_color">#b383f0</color>
+
+    <!-- 个人信息 -->
+    <color name="username_textcolor">#63d2ff</color>
+
+    <!-- 我的选校 -->
+    <color name="my_cs_item_title_textcolor">#b6b6b6</color>
+    <color name="university_textcolor">#398de3</color>
+
+    <!-- 投诉底部背景颜色 -->
+    <color name="complain_bottom_bg_color">#398de3</color>
+
+    <!-- 我的学生顶部筛选分割线-->
+    <color name="filter_divider_color">#2b75c1</color>
+
+    <color name="praise_textcolor">#ff4c4c</color>
+    <color name="complain_textcolor">#4a92dc</color>
+
+    <color name="unhandled">#f45151</color>
+
+    <color name="complain_details_expanding">#e8f3ff</color>
+    <!--首页选择颜色-->
+    <color name="select_bottom_blue">#376EBE</color>
+    <color name="white_drak">#F1F1F1</color>
+    <color name="login_btn_bg">#008FCE</color>
+    <color name="orange">#FF8000</color>
+    <color name="ashen_while">#F7F7F7</color>
+
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <color name="background">#FF000000</color>
+    <color name="pink_red">#F63E2A</color>
+    <color name="bulegray">#f0f0f0</color>
+    <color name="gray">#828282</color>
+    <color name="graylight">#cccccc</color>
+    <color name="orange_light">#fdaa0b</color>
+    <color name="gold">#ffd700</color>
+    <color name="semitransparent">#90000000</color>
+    <color name="nearly_hard">#97000000</color>
+    <color name="font_focus">#D7F679</color>
+    <color name="gold_player">#F7F466</color>
+    <color name="whitetran">#87FFFFFF</color>
+    <color name="divider_line">#FF575757</color>
+
+    <color name="listview_item_normal">#eef0ed</color>
+    <color name="listview_item_pressed">#d4d4d4</color>
+
+    <color name="message_checked">#90918f</color>
+    <color name="message_no_check">#323232</color>
+
+    <color name="stick_color_bg">#e2e2e2</color>
+
+    <color name="grey">#ebebeb</color>
+    <color name="darkgrey">#C0C0C0</color>
+
+    <color name="f850_default_blue">#0079ff</color>
+
+    <drawable name="transparent">#00000000</drawable>
+
+
+    <color name="header_toast_bg">#ccebfc</color>
+    <color name="header_toast">#024ca1</color>
+    <color name="header_toast_line">#abdaf4</color>
+    <color name="offline_down_title">#909090</color>
+    <color name="offline_head_font">#FFFFFF</color>
+    <color name="gary">#898989</color>
+    <color name="taobao_black">#333333</color>
+    <color name="offline_down_size">#777777</color>
+    <color name="gray_lite">#c5c5c5</color>
+    <color name="progress_background">#ededed</color>
+
+    <color name="itemlist">#f4f4f4</color>
+    <color name="act_background">#efefef</color>
+    <color name="phone_bg">#f6f6f6</color>
+    <color name="price_color">#0A8B0A</color>
+</resources>

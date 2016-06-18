@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VideoView</string>
+    <string name="dataError">数据异常</string>
+    <string name="connectError">连接超时</string>
+    <string name="serviceError">服务器异常</string>
+    <string name="downloadError">下载失败</string>
+    <string name="marquee_text">研究下了让TextView一行显示数据，多的数据用省略号来表示，实现了，然后又继续研究看怎么样能够使TextView实现跑马灯效果，这样用户可以完整的看到所有的数据。</string>
+</resources>
