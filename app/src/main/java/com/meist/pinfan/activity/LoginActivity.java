@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.login_btn, R.id.register_tv}, type = View.OnClickListener.class)
+    @Event(value = {R.id.login_btn, R.id.register_tv,R.id.forget_pwd}, type = View.OnClickListener.class)
     private void click(View v) {
 
         switch (v.getId()) {
@@ -96,6 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case R.id.register_tv:
                 startActivity(new Intent(this, RegisterFirstActivity.class));
+                break;
+            case R.id.forget_pwd:
+                startActivity(new Intent(this,ForgetFirstActivity.class));
                 break;
         }
     }

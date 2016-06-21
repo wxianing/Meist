@@ -40,7 +40,7 @@ public class HomeHotAdapter extends BasicAdapter<HotLists> {
             vh = (ViewHolder) convertView.getTag();
         }
         ImageLoader.getInstance().displayImage(mData.get(position).getIcon(), vh.imageView, MyApplication.options);
-        vh.name.setText(mData.get(position).getName());
+//        vh.name.setText(mData.get(position).getName());
         vh.price.setText("￥" + mData.get(position).getFemalePrice());
         vh.orderCount.setText("报名人数：" + mData.get(position).getFemaleSum() + mData.get(position).getManSum() + "人");
         return convertView;
@@ -50,8 +50,8 @@ public class HomeHotAdapter extends BasicAdapter<HotLists> {
 
         @ViewInject(R.id.imageView)
         private ImageView imageView;
-        @ViewInject(R.id.name_tv)
-        private TextView name;
+//        @ViewInject(R.id.name_tv)
+//        private TextView name;
         @ViewInject(R.id.price_tv)
         private TextView price;
         @ViewInject(R.id.order_count)
