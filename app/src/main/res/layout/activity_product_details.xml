@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/titlebar"/>
+
         <ImageView
             android:id="@+id/banner_img"
             android:layout_width="match_parent"
@@ -92,7 +94,7 @@
 
         </LinearLayout>
 
-        <ListView
+        <com.meist.pinfan.view.MeasureListView
             android:id="@+id/mlist_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

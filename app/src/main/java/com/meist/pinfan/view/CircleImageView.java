@@ -18,7 +18,12 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.meist.pinfan.R;
-
+/**
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
+ */
 public class CircleImageView extends ImageView {
 
 	private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

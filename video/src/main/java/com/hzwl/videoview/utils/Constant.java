@@ -22,8 +22,10 @@ public class Constant {
 
     public static final String BASE_DIR = Environment.getExternalStorageDirectory() + File.separator + "meist" + File.separator;
 
-    public static final String FILE_DIR = BASE_DIR + "Video" + File.separator;
+    public static final String FILE_DIR = BASE_DIR + "Video1" + File.separator;
 
-    public static final String LOGIN_UTL = BASE_URL+"common/user/login";
+    public static final String VERSION_UPDATE = BASE_URL + "systemset/getlatestversoin";
+
+    public static final String BANNER_URL = BASE_URL + "article/advertise/getlist";
 
 }

@@ -11,71 +11,78 @@ import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.TypeReference;
 import com.hzwl.videoview.AppManager;
 import com.hzwl.videoview.R;
-import com.hzwl.videoview.model.ResultInfo;
+import com.hzwl.videoview.model.AppBean;
+import com.hzwl.videoview.model.AppVersion;
 import com.hzwl.videoview.model.Version;
 import com.hzwl.videoview.utils.Constant;
-import com.hzwl.videoview.utils.HttpRequestCallBack;
+import com.hzwl.videoview.utils.HttpRequestListener;
 import com.hzwl.videoview.utils.HttpRequestUtils;
-import com.hzwl.videoview.utils.JsonParse;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
-
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+import org.json.JSONObject;
 
 import java.io.File;
-
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/2/27.
  */
+
 public class HttpTask {
     public static void detectionNewAppVersion(final Context context, final boolean isUpdate, final boolean showLoading) {
-//        RequestParams params = new RequestParams();
-//        HttpRequestUtils.create(context).send(params, new HttpRequestCallBack<ResultInfo>() {
-//
-//            @Override
-//            public void onSuccess(ResultInfo resultInfo, int requestCode) {
+        HashMap params = new HashMap();
+        params.put("AppId", 102);
+
+        HttpRequestUtils.create(context).send(Constant.VERSION_UPDATE, params, new HttpRequestListener() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
 //                final Version v = JsonParse.parseToObject(resultInfo, Version.class);
-//                if (v == null) {
-//                    return;
-//                }
-//                int versionCode = 0;
-//                try {
-//                    versionCode = Integer.parseInt(v.getVersionCode());
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//                if (versionCode > AppManager.getAppVersionCode(context)) {
-//                    if (isUpdate) {
-//                        new AlertDialog.Builder(context).setTitle("版本升级")
-//                                .setMessage("检测到有新版本，是否升级？")
-//                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
-//
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog,
-//                                                        int which) {
-//                                        updateApp(context, v);
-//                                    }
-//                                }).setNegativeButton("否", null).create().show();
-//                    } else {
-//                        //发送广播刷新设置界面的新版本显示
-//                        Intent intent = new Intent(Constant.ACTION_NEW_VERSION);
-//                        intent.putExtra(Constant.VERSION_NAME, v.getVersionName());
-//                        context.sendBroadcast(intent);
-//                    }
-//
-//                } else {
-//                    if (showLoading) {
-//                        Toast.makeText(context, "已是最新版本", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//        });
+                final AppBean<Version> v = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<Version>>() {
+                });
+
+                if (v == null && v.getEnumcode() == 0) {
+                    return;
+                }
+                int versionCode = 0;
+                try {
+                    versionCode = Integer.parseInt(v.getData().getVersionCode());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (versionCode > AppManager.getAppVersionCode(context)) {
+                    if (isUpdate) {
+                        new AlertDialog.Builder(context).setTitle("版本升级")
+                                .setMessage("检测到有新版本，是否升级？")
+                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        updateApp(context, v.getData());
+                                    }
+                                }).setNegativeButton("否", null).create().show();
+                    } else {
+                        //发送广播刷新设置界面的新版本显示
+                        Intent intent = new Intent(Constant.ACTION_NEW_VERSION);
+                        intent.putExtra(Constant.VERSION_NAME, v.getData().getVersionName());
+                        context.sendBroadcast(intent);
+                    }
+
+                } else {
+                    if (showLoading) {
+                        Toast.makeText(context, "已是最新版本", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
     }
 
 

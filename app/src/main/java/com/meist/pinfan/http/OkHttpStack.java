@@ -6,10 +6,11 @@ import com.squareup.okhttp.OkUrlFactory;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 /**
- * Created by pyz on 15-4-17.
- * 网络请求的类
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 
 public class OkHttpStack extends HurlStack {

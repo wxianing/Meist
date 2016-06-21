@@ -15,14 +15,33 @@ import com.meist.pinfan.utils.Constant;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2016/6/2 0002.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 public class HttpRequestUtils {
+    private static HttpRequestUtils mInstance;
 
-    public static void send(String url, HashMap params, final HttpRequestListener listener) {
+    public HttpRequestUtils() {
+    }
+
+    public static synchronized HttpRequestUtils getmInstance() {
+        if (mInstance == null) {
+            synchronized (HttpRequestUtils.class) {
+                if (mInstance == null) {
+                    mInstance = new HttpRequestUtils();
+                }
+            }
+        }
+        return mInstance;
+    }
+
+    public void send(String url, HashMap params, final HttpRequestListener listener) {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, JSON.toJSONString(params), new Response.Listener<JSONObject>() {
             @Override

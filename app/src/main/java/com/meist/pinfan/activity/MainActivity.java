@@ -21,6 +21,12 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
+ */
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
     @ViewInject(R.id.main_bottom_rg)
@@ -36,10 +42,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 //        }
-        initView();
+//        initView();
     }
-
-    private void initView() {
+    @Override
+    public void onInitView() {
         mFragments = new ArrayList<>();
         mFragments.add(new HomeFragment());
         mFragments.add(new ClassifyFragment());
@@ -99,7 +105,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         return super.onKeyDown(keyCode, event);
     }
 
-
+    /**
+     * 退出系统
+     */
     private void exitSystem() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {
             Toast.makeText(getApplicationContext(), "再按一次返回键退出程序",

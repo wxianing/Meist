@@ -26,7 +26,12 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.HashMap;
-
+/**
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
+ */
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
     private HttpCallBack mCallBack;
@@ -83,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         params.put("Password", passWord);
 
         if (NullUtils.isNull(userName) && NullUtils.isNull(passWord)) {
-            HttpRequestUtils.send(Constant.LOGIN_URL, params, mCallBack);
+            HttpRequestUtils.getmInstance().send(Constant.LOGIN_URL, params, mCallBack);
         } else {
             ToastUtils.show(this, "用户名或密码不能为空!");
         }

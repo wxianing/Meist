@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/PinFan.iml" filepath="$PROJECT_DIR$/PinFan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ptr/ptr.iml" filepath="$PROJECT_DIR$/ptr/ptr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/video/videoview.iml" filepath="$PROJECT_DIR$/video/videoview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video/video.iml" filepath="$PROJECT_DIR$/video/video.iml" />
       <module fileurl="file://$PROJECT_DIR$/xutils/xutils.iml" filepath="$PROJECT_DIR$/xutils/xutils.iml" />
     </modules>
   </component>

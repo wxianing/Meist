@@ -32,9 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.widget.AdapterView.*;
-
 /**
- * A simple {@link Fragment} subclass.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_classify)
 public class ClassifyFragment extends BaseFragment implements OnItemClickListener {
@@ -70,7 +72,7 @@ public class ClassifyFragment extends BaseFragment implements OnItemClickListene
     }
 
     private void initData() {
-        HttpRequestUtils.send(Constant.CLASSIFY_UTL, null, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(Constant.CLASSIFY_UTL, null, new HttpRequestListener() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 AppBeans<Classify> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBeans<Classify>>() {

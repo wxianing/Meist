@@ -18,7 +18,10 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import org.xutils.x;
 
 /**
- * Created by Administrator on 2016/6/2 0002.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 public class MyApplication extends Application {
 

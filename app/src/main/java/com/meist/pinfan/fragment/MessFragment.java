@@ -20,7 +20,10 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.HashMap;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_message)
 public class MessFragment extends BaseFragment {
@@ -52,7 +55,7 @@ public class MessFragment extends BaseFragment {
         params.put("PageIndex", 1);
         params.put("PageSize", 10);
 
-        HttpRequestUtils.send(Constant.VIDEO_LIST_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(Constant.VIDEO_LIST_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 Log.e("jsonObject", jsonObject.toString());

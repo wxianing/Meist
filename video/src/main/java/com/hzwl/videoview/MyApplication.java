@@ -2,6 +2,7 @@ package com.hzwl.videoview;
 
 
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -9,11 +10,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 import com.hzwl.videoview.utils.OkHttpStack;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 /**
- * Created by Administrator on 2016/6/2 0002.
+ * Package：com.hzwl.videoview.model
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/20
  */
 public class MyApplication extends Application {
+
+    public static ImageLoader imageLoader = ImageLoader.getInstance();
+    public static DisplayImageOptions options;
 
     public static final String TAG = "VolleyPatterns";
     private RequestQueue mRequestQueue;
@@ -23,7 +35,23 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        initImageLoader(getApplicationContext());
+        options = new DisplayImageOptions.Builder()
+                .showStubImage(R.mipmap.ic_launcher)//加载等待 时显示的图片
+                .showImageForEmptyUri(R.mipmap.ic_launcher)//加载数据为空时显示的图片
+                .showImageOnFail(R.mipmap.ic_launcher)//加载失败时显示的图片
+                .cacheInMemory()
+                .cacheOnDisc().build();
+    }
 
+    public static void initImageLoader(Context context) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                context).threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+        ImageLoader.getInstance().init(config);
+        // imageLoader.init(ImageLoaderConfiguration.createDefault(context));
     }
 
     public static synchronized MyApplication getmInstance() {
@@ -53,5 +81,4 @@ public class MyApplication extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
-
 }

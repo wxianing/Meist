@@ -1,7 +1,10 @@
 package com.meist.pinfan.utils;
 
 /**
- * Created by Administrator on 2016/6/6 0006.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 public class NullUtils {
     public static boolean isNull(String str) {

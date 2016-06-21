@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import org.xutils.x;
 
 /**
- * Created by Administrator on 2016/6/2 0002.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 public class BaseFragment extends Fragment {
     private boolean injected = false;
@@ -28,5 +31,17 @@ public class BaseFragment extends Fragment {
         if (!injected) {
             x.view().inject(this, this.getView());
         }
+        onInitView();
+        onInitData();
+        onInitEvent();
+    }
+
+    public void onInitEvent() {
+    }
+
+    public void onInitView() {
+    }
+
+    public void onInitData() {
     }
 }

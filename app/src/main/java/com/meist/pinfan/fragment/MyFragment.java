@@ -14,7 +14,10 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_my)
 public class MyFragment extends BaseFragment {

@@ -1,7 +1,7 @@
-package com.hzwl.videoview;
+package com.hzwl.videoview.activity;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 
 import com.alibaba.fastjson.TypeReference;
 import com.google.gson.Gson;
+import com.hzwl.videoview.R;
 import com.hzwl.videoview.model.AppBean;
-import com.hzwl.videoview.model.ResultInfo;
-import com.hzwl.videoview.model.VideoBean;
+import com.hzwl.videoview.model.Video;
 import com.hzwl.videoview.model.VideoInfo;
 import com.hzwl.videoview.task.HttpTask;
 import com.hzwl.videoview.utils.Constant;
@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
     private ImageView imageView;
     public static List<VideoInfo> allVideoList = new ArrayList<VideoInfo>();
     private CallBack mCallBack;
-    private List<AppBean.DataBean.DataListBean> mDatas = null;//服务器的视屏集合
+    private List<Video.DataListBean> mDatas = null;//服务器的视屏集合
     private Gson gson;
     private List<String> fileNames = new ArrayList<>();
     private String name;
@@ -96,9 +96,9 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
         HttpRequestUtils.send(Constant.DOWNLOAD_VIDEO_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                Log.e("jsonObject>>>>>>", jsonObject.toString());
-                AppBean appBean = gson.fromJson(jsonObject.toString(), AppBean.class);
-                if (appBean != null) {
+                AppBean<Video> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<Video>>() {
+                });
+                if (appBean != null && appBean.getEnumcode() == 0) {
                     mDatas = appBean.getData().getDataList();
                     deleteFiles(mDatas);
                     downloads(mDatas);
@@ -108,7 +108,7 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
         selectShow(position, allVideoList);
     }
 
-    private void deleteFiles(List<AppBean.DataBean.DataListBean> mDatas) {
+    private void deleteFiles(List<Video.DataListBean> mDatas) {
         for (int i = 0; i < mDatas.size(); i++) {
             fileNames.add(mDatas.get(i).getVideoName() + FileUtils.getFileType(mDatas.get(i).getFilePath()));
         }
@@ -119,7 +119,7 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
         }
     }
 
-    private void downloads(List<AppBean.DataBean.DataListBean> mDatas) {
+    private void downloads(List<Video.DataListBean> mDatas) {
         if (mDatas != null && mDatas.size() > 0) {
             for (int i = 0; i < mDatas.size(); i++) {
                 Log.e("data", mDatas.get(i).getVideoName());
@@ -145,10 +145,10 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
             if (MediaFileUtils.isVideoFileType(allVideoList.get(position).getPath())) {
                 startPlayer(allVideoList.get(position).getPath());
             } else {
-                mVideoView.setVisibility(View.GONE);
-                imageView.setVisibility(View.VISIBLE);
-                Bitmap bitmap = BitmapFactory.decodeFile(files.get(position).getPath());
-                imageView.setImageBitmap(bitmap);
+//                mVideoView.setVisibility(View.GONE);
+//                imageView.setVisibility(View.VISIBLE);
+//                Bitmap bitmap = BitmapFactory.decodeFile(files.get(position).getPath());
+//                imageView.setImageBitmap(bitmap);
             }
         }
     }
@@ -184,7 +184,15 @@ public class MainActivity extends Activity implements MediaPlayer.OnCompletionLi
         } else {
             position = 0;
             selectShow(position, allVideoList);
+//            Intent intent = new Intent(this, ImageActivity.class);
+//            startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectShow(position, allVideoList);
     }
 
     private class CallBack extends HttpRequestCallBack<File> {

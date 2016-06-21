@@ -5,7 +5,10 @@ import com.android.volley.VolleyError;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2016/5/11 0011.
+ * Package：com.meist.pinfan.utils
+ * 作  用：
+ * Author：wxianing
+ * 时  间：2016/6/18
  */
 
 public abstract class HttpRequestListener {
