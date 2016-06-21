@@ -26,4 +26,6 @@ public class Constant {
     public static final String CAIXI_DETAILS_URL = BASE_URL + "product/caixi/getcaixi";
     //首页热门
     public static final String HOME_HOTS_URL = BASE_URL + "product/caixi/gethotlist";
+
+    public static final String UPDATE_PWD_URL = BASE_URL + "systemset/account/updatepassword";
 }

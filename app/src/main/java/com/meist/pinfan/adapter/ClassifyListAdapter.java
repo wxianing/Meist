@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
 import com.meist.pinfan.model.ClassifyLists;
+import com.meist.pinfan.view.AutoAdjustHeightImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.xutils.view.annotation.ViewInject;
@@ -47,7 +48,7 @@ public class ClassifyListAdapter extends BasicAdapter<ClassifyLists.DataListBean
 
     private static class ViewHolder {
         @ViewInject(R.id.imageView)
-        private ImageView imageView;
+        private AutoAdjustHeightImageView imageView;
         @ViewInject(R.id.food_name)
         private TextView name;
         @ViewInject(R.id.count_tv)

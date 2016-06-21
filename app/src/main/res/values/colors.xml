@@ -119,4 +119,5 @@
     <color name="phone_bg">#f6f6f6</color>
     <color name="price_color">#0A8B0A</color>
     <color name="text_drakgreen">#67B9C0</color>
+    <color name="line_color">#DBDBDB</color>
 </resources>

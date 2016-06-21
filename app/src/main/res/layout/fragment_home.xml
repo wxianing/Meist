@@ -20,6 +20,7 @@
 
             <include layout="@layout/home_navigation_layout" />
 
+
             <include layout="@layout/home_hots_layout" />
 
             <com.meist.pinfan.view.MeasureListView

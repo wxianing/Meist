@@ -3,10 +3,8 @@ package com.meist.pinfan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
@@ -26,6 +24,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.HashMap;
+
 /**
  * Package：com.meist.pinfan.utils
  * 作  用：
@@ -77,20 +76,27 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.login_btn}, type = View.OnClickListener.class)
-    private void loginBtn(View v) {
+    @Event(value = {R.id.login_btn, R.id.register_tv}, type = View.OnClickListener.class)
+    private void click(View v) {
 
-        userName = userNameEt.getText().toString().trim();
-        passWord = passWordEt.getText().toString().trim();
+        switch (v.getId()) {
+            case R.id.login_btn:
+                userName = userNameEt.getText().toString().trim();
+                passWord = passWordEt.getText().toString().trim();
 
-        HashMap params = new HashMap();
-        params.put("UserName", userName);
-        params.put("Password", passWord);
+                HashMap params = new HashMap();
+                params.put("UserName", userName);
+                params.put("Password", passWord);
 
-        if (NullUtils.isNull(userName) && NullUtils.isNull(passWord)) {
-            HttpRequestUtils.getmInstance().send(Constant.LOGIN_URL, params, mCallBack);
-        } else {
-            ToastUtils.show(this, "用户名或密码不能为空!");
+                if (NullUtils.isNull(userName) && NullUtils.isNull(passWord)) {
+                    HttpRequestUtils.getmInstance().send(Constant.LOGIN_URL, params, mCallBack);
+                } else {
+                    ToastUtils.show(this, "用户名或密码不能为空!");
+                }
+                break;
+            case R.id.register_tv:
+                startActivity(new Intent(this, RegisterFirstActivity.class));
+                break;
         }
     }
 

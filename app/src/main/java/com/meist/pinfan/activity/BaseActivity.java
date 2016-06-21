@@ -24,6 +24,6 @@ public class BaseActivity extends AppCompatActivity {
     public void onInitData() {
     }
 
-    private void onInitEvent() {
+    public void onInitEvent() {
     }
 }

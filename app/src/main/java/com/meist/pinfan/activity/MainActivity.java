@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private List<Fragment> mFragments;
     private FragmentManager manager;
     private long exitTime = 0;
+    public static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 //        }
 //        initView();
+        mainActivity = this;
     }
+
     @Override
     public void onInitView() {
         mFragments = new ArrayList<>();

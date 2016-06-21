@@ -23,7 +23,11 @@
             android:name=".activity.CaixiListActivity"
             android:label="@string/title_activity_caixi_list"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.ProductDetailsActivity"></activity>
+        <activity android:name=".activity.ProductDetailsActivity" />
+        <activity android:name=".activity.ResetPwdActivity" />
+        <activity android:name=".activity.RegisterFirstActivity" />
+        <activity android:name=".activity.RegisterSecondActivity" />
+        <activity android:name=".activity.RegisterThirdActivity"></activity>
     </application>
 
 </manifest>
