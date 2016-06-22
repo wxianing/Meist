@@ -27,7 +27,7 @@
             android:background="#DBDBDB" />
 
         <TextView
-            android:id="@+id/link_name"
+            android:id="@+id/shop_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp10"
@@ -37,6 +37,7 @@
         <include layout="@layout/horizontal_line" />
 
         <TextView
+            android:id="@+id/link_man"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp10"
@@ -82,7 +83,7 @@
             android:paddingTop="@dimen/dp10">
 
             <TextView
-                android:id="@+id/shop_name"
+                android:id="@+id/link_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

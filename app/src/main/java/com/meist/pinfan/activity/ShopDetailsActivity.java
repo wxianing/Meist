@@ -16,6 +16,7 @@ import com.meist.pinfan.utils.Constant;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -29,6 +30,12 @@ public class ShopDetailsActivity extends BaseActivity {
     private int oid;
     @ViewInject(R.id.banner_img)
     private ImageView bannerImg;
+    @ViewInject(R.id.shop_name)
+    private TextView shopName;
+    @ViewInject(R.id.link_man)
+    private TextView linkMan;
+    @ViewInject(R.id.link_phone)
+    private TextView linkPhone;
 
 
     @Override
@@ -62,7 +69,9 @@ public class ShopDetailsActivity extends BaseActivity {
 
     private void sendDataView(ShopDetails data) {
         ImageLoader.getInstance().displayImage(data.getPhoto(), bannerImg, MyApplication.options);
-
+        shopName.setText(data.getStructureName());
+        linkMan.setText("联系人:"+data.getLinkMan());
+        linkPhone.setText("联系电话:" + data.getPhone());
     }
 
     @Event(value = {R.id.back_arrows})
