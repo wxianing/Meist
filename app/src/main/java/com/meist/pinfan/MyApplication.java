@@ -46,9 +46,9 @@ public class MyApplication extends Application {
         x.Ext.setDebug(BuildConfig.DEBUG);
         initImageLoader(getApplicationContext());
         options = new DisplayImageOptions.Builder()
-                .showStubImage(R.mipmap.ic_launcher)//加载等待 时显示的图片
-                .showImageForEmptyUri(R.mipmap.ic_launcher)//加载数据为空时显示的图片
-                .showImageOnFail(R.mipmap.ic_launcher)//加载失败时显示的图片
+                .showStubImage(R.mipmap.default_img)//加载等待 时显示的图片
+                .showImageForEmptyUri(R.mipmap.default_img)//加载数据为空时显示的图片
+                .showImageOnFail(R.mipmap.default_img)//加载失败时显示的图片
                 .cacheInMemory()
                 .cacheOnDisc()
                 .build();

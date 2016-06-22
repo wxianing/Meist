@@ -16,7 +16,7 @@
     <RadioButton
         style="@style/mainRgStyle"
         android:drawableTop="@mipmap/main_rg_class_icon"
-        android:text="分类" />
+        android:text="商家" />
 
 
     <RadioButton

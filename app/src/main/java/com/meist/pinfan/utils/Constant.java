@@ -38,4 +38,9 @@ public class Constant {
     public static final String COLLECT_URL = BASE_URL + "common/user/collect";
 
     public static final String GET_COLLECT_URL = BASE_URL + "common/user/getcollectlist";
+    // 商家列表
+    public static final String SHOP_LIST_URL = BASE_URL + "common/user/getshoplist";
+    //店铺详情
+    public static final String SHOP_DETAILS_URL = BASE_URL + "common/user/getshopinfo";
+
 }

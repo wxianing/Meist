@@ -4,7 +4,6 @@
     android:layout_height="1dp"
     android:layout_marginLeft="@dimen/dp5"
     android:layout_marginRight="@dimen/dp5"
-    android:background="#DBDBDB"
-    android:orientation="vertical">
+    android:background="#DBDBDB">
 
 </LinearLayout>

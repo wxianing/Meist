@@ -31,7 +31,8 @@
         <activity android:name=".activity.ForgetFirstActivity" />
         <activity android:name=".activity.ForgetSecondActivity" />
         <activity android:name=".activity.DateListsActivity" />
-        <activity android:name=".activity.MyCollectActivity"></activity>
+        <activity android:name=".activity.MyCollectActivity" />
+        <activity android:name=".activity.ShopDetailsActivity"></activity>
     </application>
 
 </manifest>
