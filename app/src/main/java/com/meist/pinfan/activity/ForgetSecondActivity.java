@@ -1,45 +1,51 @@
 package com.meist.pinfan.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
+import com.meist.pinfan.http.HttpRequestListener;
+import com.meist.pinfan.http.HttpRequestUtils;
+import com.meist.pinfan.utils.Constant;
 import com.meist.pinfan.utils.NullUtils;
 import com.meist.pinfan.utils.ToastUtils;
 
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_register_second)
-public class RegisterSecondActivity extends BaseActivity {
+import java.util.HashMap;
+
+@ContentView(R.layout.activity_forget_second)
+public class ForgetSecondActivity extends BaseActivity {
     @ViewInject(R.id.title_tv)
     private TextView title;
+    private String phoneNum;
+    private String authCore;
+
     @ViewInject(R.id.password_et)
     private EditText passWordEt;
     @ViewInject(R.id.affirm_pwd)
     private EditText affirmPwdEt;
-    private String phoneNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getmInstance().addActivity(this);
     }
 
     @Override
     public void onInitView() {
         super.onInitView();
-        title.setText("注册2/3");
+        title.setText("忘记密码2/2");
         phoneNum = getIntent().getStringExtra("PHONE");
+        authCore = getIntent().getStringExtra("CODE");
     }
 
     @Event(value = {R.id.back_arrows, R.id.next_btn})
-    private void click(View v) {
+    private void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_arrows:
                 finish();
@@ -49,10 +55,7 @@ public class RegisterSecondActivity extends BaseActivity {
                 String affirmPwd = affirmPwdEt.getText().toString().trim();
                 if (NullUtils.isNull(passWord) && NullUtils.isNull(affirmPwd)) {
                     if (passWord.equals(affirmPwd)) {
-                        Intent intent = new Intent(this, RegisterThirdActivity.class);
-                        intent.putExtra("PASSWORD", passWord);
-                        intent.putExtra("PHONE", phoneNum);
-                        startActivity(intent);
+                        send(passWord);
                     } else {
                         ToastUtils.show(this, "两次密码不相同");
                     }
@@ -61,5 +64,18 @@ public class RegisterSecondActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    private void send(String newPwd) {
+        HashMap params = new HashMap();
+        params.put("Mobile",phoneNum);
+        params.put("Code",authCore);
+        params.put("NewPassword",authCore);
+        HttpRequestUtils.getmInstance().send(Constant.FORGET_PASSWORD_URL, params, new HttpRequestListener() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+
+            }
+        });
     }
 }

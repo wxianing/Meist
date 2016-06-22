@@ -46,12 +46,14 @@ public class ProductDetails implements Serializable {
     private int AheadDays;
     private int GradeId;
     private Object TotalComment;
+    private Object IsHot;
 
     private List<CaiXiDetailBean> CaiXiDetail;
     private List<?> PDT_ProductList;
     private List<?> stocks;
 
     private List<OrderDateListBean> OrderDateList;
+    private List<String> Pictures;
 
     public PdtSortOctionBean getPdt_SortOction() {
         return pdt_SortOction;
@@ -317,6 +319,14 @@ public class ProductDetails implements Serializable {
         this.TotalComment = TotalComment;
     }
 
+    public Object getIsHot() {
+        return IsHot;
+    }
+
+    public void setIsHot(Object IsHot) {
+        this.IsHot = IsHot;
+    }
+
     public List<CaiXiDetailBean> getCaiXiDetail() {
         return CaiXiDetail;
     }
@@ -347,6 +357,14 @@ public class ProductDetails implements Serializable {
 
     public void setOrderDateList(List<OrderDateListBean> OrderDateList) {
         this.OrderDateList = OrderDateList;
+    }
+
+    public List<String> getPictures() {
+        return Pictures;
+    }
+
+    public void setPictures(List<String> Pictures) {
+        this.Pictures = Pictures;
     }
 
     public static class PdtSortOctionBean implements Serializable{

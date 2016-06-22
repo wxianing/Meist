@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
 import com.meist.pinfan.utils.NullUtils;
 import com.meist.pinfan.utils.ToastUtils;
@@ -26,6 +27,7 @@ public class RegisterFirstActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getmInstance().addActivity(this);
     }
 
     @Override

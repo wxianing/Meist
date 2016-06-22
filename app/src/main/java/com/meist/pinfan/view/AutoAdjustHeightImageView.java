@@ -18,7 +18,6 @@ public class AutoAdjustHeightImageView extends ImageView {
 
     public AutoAdjustHeightImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-
     }
 
     public AutoAdjustHeightImageView(Context context, AttributeSet attrs, int defStyleAttr) {

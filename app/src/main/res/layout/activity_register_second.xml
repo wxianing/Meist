@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="6~20位字母或者数字"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:textColorHint="@color/gray_textcolor"
                 android:textSize="@dimen/sp14" />
 
@@ -79,7 +79,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="请输入确认密码"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:textColorHint="@color/gray_textcolor"
                 android:textSize="@dimen/sp14" />
         </LinearLayout>

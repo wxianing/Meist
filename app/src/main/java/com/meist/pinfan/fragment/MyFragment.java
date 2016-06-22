@@ -13,10 +13,13 @@ import android.widget.TextView;
 import com.meist.pinfan.R;
 import com.meist.pinfan.activity.LoginActivity;
 import com.meist.pinfan.activity.MainActivity;
+import com.meist.pinfan.activity.MyCollectActivity;
 import com.meist.pinfan.activity.ResetPwdActivity;
 import com.meist.pinfan.utils.SharedPreferencesUtils;
+import com.meist.pinfan.utils.ToastUtils;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 /**
@@ -39,6 +42,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @ViewInject(R.id.reset_password)
     private LinearLayout resetPwd;//修改密码
 
+    @ViewInject(R.id.mycollect_layout)
+    private LinearLayout mycollect;
+    @ViewInject(R.id.mypurse_layout)
+    private LinearLayout mypurse;
 
     public MyFragment() {
     }
@@ -60,22 +67,40 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         super.onInitEvent();
         logout.setOnClickListener(this);
         resetPwd.setOnClickListener(this);
+        mypurse.setOnClickListener(this);
+        mycollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.show(getActivity(), "点击了收藏");
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
+            }
+        });
     }
+
+//    @Event(value = R.id.mycollect_layout)
+//    private void click(View v){
+//        ToastUtils.show(getActivity(), "点击了收藏");
+//        startActivity(new Intent(getActivity(), MyCollectActivity.class));
+//    }
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.reset_password://修改密码
                 startActivity(new Intent(getActivity(), ResetPwdActivity.class));
                 break;
             case R.id.logout:
                 SharedPreferencesUtils.setLoginTag(getActivity(), false);//取消默认登录
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent = new Intent(getActivity(), LoginActivity.class);
                 if (MainActivity.mainActivity != null) {
                     MainActivity.mainActivity.finish();
                     MainActivity.mainActivity = null;
                 }
                 startActivity(intent);
+                break;
+            case R.id.mypurse_layout:
+                ToastUtils.show(getActivity(), "点击了钱包");
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package com.meist.pinfan;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
@@ -17,6 +18,10 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import org.xutils.x;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  * Package：com.meist.pinfan.utils
  * 作  用：
@@ -31,6 +36,7 @@ public class MyApplication extends Application {
     public static final String TAG = "VolleyPatterns";
     private RequestQueue mRequestQueue;
     private static MyApplication mInstance;
+    private List<Activity> activitys = new LinkedList<Activity>();
 
     @Override
     public void onCreate() {
@@ -83,6 +89,24 @@ public class MyApplication extends Application {
     public void cancelPendingRequests(Object tag) {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
+        }
+    }
+
+    public void addActivity(Activity activity) {
+         activitys.add(activity);
+    }
+
+    public void removeActivity(Activity activity) {
+           activitys.remove(activity);
+    }
+
+    public void closeActivitys() {
+        ListIterator<Activity> iterator = activitys.listIterator();
+        while (iterator.hasNext()) {
+            Activity activity = iterator.next();
+            if (activity != null) {
+                activity.finish();
+            }
         }
     }
 }

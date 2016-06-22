@@ -33,6 +33,7 @@ import java.util.HashMap;
  */
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
+    public static LoginActivity loginActivity;
     private HttpCallBack mCallBack;
     @ViewInject(R.id.username_edittext)
     private EditText userNameEt;
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+        loginActivity = this;
         initView();
 
     }
@@ -76,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.login_btn, R.id.register_tv,R.id.forget_pwd}, type = View.OnClickListener.class)
+    @Event(value = {R.id.login_btn, R.id.register_tv, R.id.forget_pwd}, type = View.OnClickListener.class)
     private void click(View v) {
 
         switch (v.getId()) {
@@ -98,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(this, RegisterFirstActivity.class));
                 break;
             case R.id.forget_pwd:
-                startActivity(new Intent(this,ForgetFirstActivity.class));
+                startActivity(new Intent(this, ForgetFirstActivity.class));
                 break;
         }
     }

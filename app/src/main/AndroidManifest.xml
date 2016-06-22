@@ -28,7 +28,10 @@
         <activity android:name=".activity.RegisterFirstActivity" />
         <activity android:name=".activity.RegisterSecondActivity" />
         <activity android:name=".activity.RegisterThirdActivity" />
-        <activity android:name=".activity.ForgetFirstActivity"></activity>
+        <activity android:name=".activity.ForgetFirstActivity" />
+        <activity android:name=".activity.ForgetSecondActivity" />
+        <activity android:name=".activity.DateListsActivity" />
+        <activity android:name=".activity.MyCollectActivity"></activity>
     </application>
 
 </manifest>

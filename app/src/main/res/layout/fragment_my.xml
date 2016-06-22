@@ -56,6 +56,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/mypurse_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp20"
@@ -83,6 +84,7 @@
         <include layout="@layout/horizontal_line" />
 
         <LinearLayout
+            android:id="@+id/mycollect_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -246,6 +248,5 @@
         </LinearLayout>
 
         <include layout="@layout/horizontal_line" />
-
     </LinearLayout>
 </ScrollView>

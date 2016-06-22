@@ -1,26 +1,35 @@
 package com.meist.pinfan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
+import com.meist.pinfan.adapter.CaixiDetailAdapter;
+import com.meist.pinfan.adapter.ImageAadpter;
 import com.meist.pinfan.http.HttpRequestListener;
 import com.meist.pinfan.http.HttpRequestUtils;
 import com.meist.pinfan.model.AppBean;
 import com.meist.pinfan.model.ProductDetails;
 import com.meist.pinfan.utils.Constant;
+import com.meist.pinfan.utils.ToastUtils;
+import com.meist.pinfan.view.AutoAdjustHeightImageView;
 import com.meist.pinfan.view.MeasureListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +42,7 @@ public class ProductDetailsActivity extends BaseActivity {
     private TextView title;
 
     @ViewInject(R.id.banner_img)
-    private ImageView bannerImg;//头部图片
+    private AutoAdjustHeightImageView bannerImg;//头部图片
     @ViewInject(R.id.produce_name)
     private TextView produceName;//商品名称
     @ViewInject(R.id.produce_price)
@@ -51,6 +60,16 @@ public class ProductDetailsActivity extends BaseActivity {
 
     private List<ProductDetails.CaiXiDetailBean> mDatas;
     private CaixiDetailAdapter mAdapter;
+    //图片列表
+    @ViewInject(R.id.img_list)
+    private MeasureListView imgListView;
+    private List<String> imageUrls;
+    private ImageAadpter imageAadpter;
+    @ViewInject(R.id.data_time)
+    private TextView datatime;
+    private AppBean<ProductDetails> appBean;
+    @ViewInject(R.id.collect_btn)
+    private Button collectBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +84,9 @@ public class ProductDetailsActivity extends BaseActivity {
         mDatas = new ArrayList<>();
         mAdapter = new CaixiDetailAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
+        imageUrls = new ArrayList<>();
+        imageAadpter = new ImageAadpter(imageUrls, this);
+        imgListView.setAdapter(imageAadpter);
     }
 
     @Override
@@ -78,13 +100,58 @@ public class ProductDetailsActivity extends BaseActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.back_arrows})
-    public void onClick(View v) {
+    @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn})
+    private void onClick(View v) {
         switch (v.getId()) {
+            case R.id.select_data:
+                Intent intent = new Intent(this, DateListsActivity.class);
+                intent.putExtra("PRODUCTDETAILS", (Serializable) appBean.getData());
+                startActivityForResult(intent, Constant.ENUMCODE);
+                break;
             case R.id.back_arrows:
                 finish();
                 break;
+            case R.id.collect_btn:
+                sendCollectMsg();
+                break;
+            case R.id.submit_order:
+
+                break;
         }
+    }
+
+    private void sendCollectMsg() {
+        int isCollect = 0;
+        HashMap params = new HashMap();
+        params.put("FKId", appBean.getData().getID());//商品Id
+        params.put("FKType", 3);//
+        final String value = collectBtn.getText().toString().trim();
+        if (value.equals("立即收藏")) {
+            params.put("IsCollect", 1);//1.收藏
+        } else {
+            params.put("IsCollect", 0);//0.取消
+        }
+        HttpRequestUtils.getmInstance().send(Constant.COLLECT_URL, params, new HttpRequestListener() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    JSONObject obj = new JSONObject(jsonObject.toString());
+                    int enumcode = obj.getInt("enumcode");
+                    if (enumcode == 0) {
+                        if (value.equals("立即收藏")) {
+                            collectBtn.setText("已收藏");
+                            ToastUtils.show(ProductDetailsActivity.this, "收藏成功");
+                        }
+                        if (value.equals("已收藏")) {
+                            collectBtn.setText("立即收藏");
+                            ToastUtils.show(ProductDetailsActivity.this, "取消收藏成功");
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -93,12 +160,14 @@ public class ProductDetailsActivity extends BaseActivity {
         HttpRequestUtils.getmInstance().send(Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                AppBean<ProductDetails> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<ProductDetails>>() {
+                appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<ProductDetails>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     sendDataView(appBean);
                     mDatas.addAll(appBean.getData().getCaiXiDetail());
                     mAdapter.notifyDataSetChanged();
+                    imageUrls.addAll(appBean.getData().getPictures());
+                    imageAadpter.notifyDataSetChanged();
                 }
             }
         });
@@ -112,5 +181,12 @@ public class ProductDetailsActivity extends BaseActivity {
         shopName.setText(appBean.getData().getPdt_SortOction().getStructureName());
         phoneNum.setText(appBean.getData().getPdt_SortOction().getPhone());
         linkMan.setText(appBean.getData().getPdt_SortOction().getLinkMan());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String result = data.getExtras().getString("result");
+        datatime.setText(result);
     }
 }

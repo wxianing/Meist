@@ -1,128 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
     tools:context="com.meist.pinfan.activity.ProductDetailsActivity">
 
-    <LinearLayout
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/titlebar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/titlebar"/>
-
-        <ImageView
-            android:id="@+id/banner_img"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buy_layout"
+        android:layout_below="@+id/title_bar"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/dp10"
-            android:paddingLeft="@dimen/dp10"
-            android:paddingRight="@dimen/dp10"
-            android:paddingTop="@dimen/dp15">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/produce_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="川菜桌"
-                android:textColor="@color/full_black" />
 
-            <TextView
-                android:id="@+id/produce_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp5"
-                android:layout_marginTop="@dimen/dp5"
-                android:text="￥50.00"
-                android:textColor="@color/pink_red" />
-
-            <include layout="@layout/horizontal_line" />
-
-            <RelativeLayout
+            <com.meist.pinfan.view.AutoAdjustHeightImageView
+                android:id="@+id/banner_img"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="商品类型：A" />
-
-                <TextView
-                    android:id="@+id/join_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="报名人数(男：5人/女：5人)" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/dp10"
-            android:paddingLeft="@dimen/dp10"
-            android:paddingRight="@dimen/dp5"
-            android:paddingTop="@dimen/dp10">
-
-            <TextView
-                android:id="@+id/data_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="请选择预定日期"
-                android:textSize="@dimen/sp14" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/right_arrow" />
-
-        </LinearLayout>
-
-        <com.meist.pinfan.view.MeasureListView
-            android:id="@+id/mlist_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/dp5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="商家信息"
-                android:textColor="@color/text_drakgreen" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/dp5"
-                android:background="#DBDBDB" />
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp10"
+                android:paddingLeft="@dimen/dp10"
+                android:paddingRight="@dimen/dp10"
+                android:paddingTop="@dimen/dp15">
+
+                <TextView
+                    android:id="@+id/produce_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="川菜桌"
+                    android:textColor="@color/full_black" />
+
+                <TextView
+                    android:id="@+id/produce_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp5"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:text="￥50.00"
+                    android:textColor="@color/pink_red" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商品类型：A" />
+
+                    <TextView
+                        android:id="@+id/join_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="报名人数(男：5人/女：5人)" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/select_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:paddingBottom="@dimen/dp10"
@@ -131,11 +92,11 @@
                 android:paddingTop="@dimen/dp10">
 
                 <TextView
-                    android:id="@+id/shop_name"
+                    android:id="@+id/data_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="店名"
+                    android:text="请选择预定日期"
                     android:textSize="@dimen/sp14" />
 
                 <ImageView
@@ -145,77 +106,191 @@
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
-
             <TextView
-                android:id="@+id/phone_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp10"
-                android:text="110" />
-
-            <include layout="@layout/horizontal_line" />
-
-            <TextView
-                android:id="@+id/link_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp10"
-                android:text="呵呵" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/dp5"
-                android:background="#DBDBDB" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/dp5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="商品评价"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp5"
+                android:paddingLeft="@dimen/dp10"
+                android:paddingTop="@dimen/dp5"
+                android:text="包含菜品"
                 android:textColor="@color/text_drakgreen" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/dp5"
                 android:background="#DBDBDB" />
+
+            <com.meist.pinfan.view.MeasureListView
+                android:id="@+id/mlist_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
                 android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingBottom="@dimen/dp10"
-                android:paddingLeft="@dimen/dp10"
-                android:paddingRight="@dimen/dp5"
-                android:paddingTop="@dimen/dp10">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp5">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="共有0人评价"
-                    android:textSize="@dimen/sp14" />
-
-                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/right_arrow" />
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="商家信息"
+                    android:textColor="@color/text_drakgreen" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="#DBDBDB" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/dp10"
+                    android:paddingLeft="@dimen/dp10"
+                    android:paddingRight="@dimen/dp5"
+                    android:paddingTop="@dimen/dp10">
+
+                    <TextView
+                        android:id="@+id/shop_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="店名"
+                        android:textSize="@dimen/sp14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right_arrow" />
+
+                </LinearLayout>
+
+                <include layout="@layout/horizontal_line" />
+
+                <TextView
+                    android:id="@+id/phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10"
+                    android:text="110" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <TextView
+                    android:id="@+id/link_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10"
+                    android:text="呵呵" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="#DBDBDB" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="商品评价"
+                    android:textColor="@color/text_drakgreen" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="#DBDBDB" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/dp10"
+                    android:paddingLeft="@dimen/dp10"
+                    android:paddingRight="@dimen/dp5"
+                    android:paddingTop="@dimen/dp10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="共有0人评价"
+                        android:textSize="@dimen/sp14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right_arrow" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.meist.pinfan.view.MeasureListView
+                android:id="@+id/img_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buy_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:padding="@dimen/dp5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/collect_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_orange_coloe"
+                android:text="立即收藏"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/submit_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_orange_coloe"
+                android:text="提交订单"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16" />
+        </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>
