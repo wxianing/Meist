@@ -2,6 +2,7 @@ package com.meist.pinfan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -100,11 +101,12 @@ public class ProductDetailsActivity extends BaseActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn})
+    @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn, R.id.shop_layout})
     private void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.select_data:
-                Intent intent = new Intent(this, DateListsActivity.class);
+                intent = new Intent(this, DateListsActivity.class);
                 intent.putExtra("PRODUCTDETAILS", (Serializable) appBean.getData());
                 startActivityForResult(intent, Constant.ENUMCODE);
                 break;
@@ -116,6 +118,11 @@ public class ProductDetailsActivity extends BaseActivity {
                 break;
             case R.id.submit_order:
 
+                break;
+            case R.id.shop_layout:
+                intent = new Intent(this, ShopDetailsActivity.class);
+                intent.putExtra("OID", appBean.getData().getPdt_SortOction().getStructureId());
+                startActivity(intent);
                 break;
         }
     }
@@ -131,11 +138,11 @@ public class ProductDetailsActivity extends BaseActivity {
         } else {
             params.put("IsCollect", 0);//0.取消
         }
-        HttpRequestUtils.getmInstance().send(Constant.COLLECT_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.COLLECT_URL, params, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
+            public void onSuccess(String result) {
                 try {
-                    JSONObject obj = new JSONObject(jsonObject.toString());
+                    JSONObject obj = new JSONObject(result);
                     int enumcode = obj.getInt("enumcode");
                     if (enumcode == 0) {
                         if (value.equals("立即收藏")) {
@@ -157,10 +164,10 @@ public class ProductDetailsActivity extends BaseActivity {
     private void initData() {
         HashMap params = new HashMap();
         params.put("id", oid);
-        HttpRequestUtils.getmInstance().send(Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<ProductDetails>>() {
+            public void onSuccess(String result) {
+                appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBean<ProductDetails>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     sendDataView(appBean);
@@ -186,7 +193,11 @@ public class ProductDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String result = data.getExtras().getString("result");
-        datatime.setText(result);
+        if (requestCode == Constant.ENUMCODE) {
+            if (data != null) {
+                String result = data.getExtras().getString("result");
+                datatime.setText(result);
+            }
+        }
     }
 }

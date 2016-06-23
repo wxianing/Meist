@@ -1,5 +1,6 @@
 package com.meist.pinfan.http;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -8,14 +9,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.utils.Constant;
+import com.meist.pinfan.view.CustomDialogUtils;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
 import java.util.Map;
 
 /**
@@ -25,16 +25,19 @@ import java.util.Map;
  * 时  间：2016/6/18
  */
 public class HttpRequestUtils {
+
+    private Context mContext;
     private static HttpRequestUtils mInstance;
 
-    public HttpRequestUtils() {
+    public HttpRequestUtils(Context context) {
+        this.mContext = context;
     }
 
-    public static synchronized HttpRequestUtils getmInstance() {
+    public static synchronized HttpRequestUtils getmInstance(Context context) {
         if (mInstance == null) {
             synchronized (HttpRequestUtils.class) {
                 if (mInstance == null) {
-                    mInstance = new HttpRequestUtils();
+                    mInstance = new HttpRequestUtils(context);
                 }
             }
         }
@@ -42,17 +45,19 @@ public class HttpRequestUtils {
     }
 
     public void send(String url, HashMap params, final HttpRequestListener listener) {
-
+        CustomDialogUtils.showProgressDialog(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, JSON.toJSONString(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("response", response.toString());
-                listener.onSuccess(response);
+                listener.onSuccess(response.toString());
+                CustomDialogUtils.cannelProgressDialog();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 listener.onFail(volleyError);
+                CustomDialogUtils.cannelProgressDialog();
             }
         }) {
             public Map<String, String> getHeaders() {

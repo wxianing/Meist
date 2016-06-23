@@ -114,15 +114,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onInitData() {
         HashMap bannerParams = new HashMap();
-        HttpRequestUtils.getmInstance().send(Constant.BANNER_URL, bannerParams, mCallBack);
+        HttpRequestUtils.getmInstance(getActivity()).send(Constant.BANNER_URL, bannerParams, mCallBack);
 
         HashMap hotParams = new HashMap();
         hotParams.put("ResourceType", 1);
 
-        HttpRequestUtils.getmInstance().send(Constant.HOME_HOTS_URL, hotParams, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(getActivity()).send(Constant.HOME_HOTS_URL, hotParams, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                AppBeans<HotLists> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBeans<HotLists>>() {
+            public void onSuccess(String result) {
+                AppBeans<HotLists> appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBeans<HotLists>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     mDatas.addAll(appBean.getData());
@@ -162,9 +162,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      */
     class CallBack extends HttpRequestListener {
         @Override
-        public void onSuccess(JSONObject jsonObject) {
-            Log.e("Banner", jsonObject.toString());
-            AppBeans<Banner> appBeans = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBeans<Banner>>() {
+        public void onSuccess(String result) {
+            Log.e("Banner", result.toString());
+            AppBeans<Banner> appBeans = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBeans<Banner>>() {
             });
             if (appBeans != null && appBeans.getEnumcode() == 0) {
                 imageUrls.addAll(appBeans.getData());

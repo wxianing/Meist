@@ -32,7 +32,13 @@
         <activity android:name=".activity.ForgetSecondActivity" />
         <activity android:name=".activity.DateListsActivity" />
         <activity android:name=".activity.MyCollectActivity" />
-        <activity android:name=".activity.ShopDetailsActivity"></activity>
+        <activity android:name=".activity.ShopDetailsActivity" />
+        <activity android:name=".activity.CaixiCommentActivity" />
+        <activity android:name=".activity.MessNoticeActivity" />
+        <activity android:name=".activity.MyRedpacketActivity" />
+        <activity android:name=".activity.MyOrderActivity" />
+        <activity android:name=".activity.PresentActivity" />
+        <activity android:name=".activity.OrderDetailsActivity"></activity>
     </application>
 
 </manifest>

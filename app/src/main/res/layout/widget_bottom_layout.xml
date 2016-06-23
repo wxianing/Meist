@@ -22,7 +22,7 @@
     <RadioButton
         style="@style/mainRgStyle"
         android:drawableTop="@mipmap/main_rg_message_icon"
-        android:text="我的评价" />
+        android:text="消息" />
 
     <RadioButton
         style="@style/mainRgStyle"

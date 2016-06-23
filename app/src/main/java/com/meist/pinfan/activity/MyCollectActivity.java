@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.meist.pinfan.R;
 import com.meist.pinfan.adapter.MyCollectsAdater;
@@ -14,7 +15,6 @@ import com.meist.pinfan.model.AppBean;
 import com.meist.pinfan.model.Collects;
 import com.meist.pinfan.utils.Constant;
 
-import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Package：com.meist.pinfan.activity
+ * 作  用：我的收藏
+ * Author：wxianing
+ * 时  间：2016/6/18
+ */
 @ContentView(R.layout.activity_my_collect)
 public class MyCollectActivity extends BaseActivity {
     @ViewInject(R.id.title_tv)
@@ -55,10 +61,10 @@ public class MyCollectActivity extends BaseActivity {
 
     private void loadData() {
         HashMap params = new HashMap();
-        HttpRequestUtils.getmInstance().send(Constant.GET_COLLECT_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(MyCollectActivity.this).send(Constant.GET_COLLECT_URL, params, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                AppBean<Collects> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<Collects>>() {
+            public void onSuccess(String resutl) {
+                AppBean<Collects> appBean = JSONObject.parseObject(resutl, new TypeReference<AppBean<Collects>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     mDatas.addAll(appBean.getData().getDataList());

@@ -111,11 +111,11 @@ public class RegisterThirdActivity extends BaseActivity {
         params.put("Sex", getsex(sex));
         params.put("HunYin", getHunyin(hunyin));
         params.put("Mobile", phone);
-        HttpRequestUtils.getmInstance().send(Constant.REGISTER_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(RegisterThirdActivity.this).send(Constant.REGISTER_URL, params, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
+            public void onSuccess(String result) {
                 try {
-                    JSONObject obj = new JSONObject(jsonObject.toString());
+                    JSONObject obj = new JSONObject(result);
 
                     int enumcode = obj.getInt("enumcode");
                     if (enumcode == 0) {
@@ -131,7 +131,6 @@ public class RegisterThirdActivity extends BaseActivity {
                         SharedPreferencesUtils.saveStringData(RegisterThirdActivity.this, "PASSWORD", password);
                         Intent intent = new Intent(RegisterThirdActivity.this, LoginActivity.class);
                         startActivity(intent);
-
 
                         RegisterThirdActivity.this.finish();
                     }

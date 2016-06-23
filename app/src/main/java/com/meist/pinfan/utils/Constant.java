@@ -42,5 +42,8 @@ public class Constant {
     public static final String SHOP_LIST_URL = BASE_URL + "common/user/getshoplist";
     //店铺详情
     public static final String SHOP_DETAILS_URL = BASE_URL + "common/user/getshopinfo";
-
+    //订单列表
+    public static final String ORDER_LIST_URL = BASE_URL + "order/order/getorderlist";
+    //订单详情
+    public static final String ORDER_DETAILS_URL = BASE_URL + "order/order/getorder";
 }

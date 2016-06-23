@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Package：com.meist.pinfan.utils
+ * Package：com.meist.pinfan.activity
  * 作  用：
  * Author：wxianing
  * 时  间：2016/6/18

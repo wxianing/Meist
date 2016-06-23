@@ -26,7 +26,7 @@ import org.xutils.x;
 import java.util.HashMap;
 
 /**
- * Package：com.meist.pinfan.utils
+ * Package：com.meist.pinfan.activity
  * 作  用：
  * Author：wxianing
  * 时  间：2016/6/18
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("Password", passWord);
 
                 if (NullUtils.isNull(userName) && NullUtils.isNull(passWord)) {
-                    HttpRequestUtils.getmInstance().send(Constant.LOGIN_URL, params, mCallBack);
+                    HttpRequestUtils.getmInstance(LoginActivity.this).send(Constant.LOGIN_URL, params, mCallBack);
                 } else {
                     ToastUtils.show(this, "用户名或密码不能为空!");
                 }
@@ -108,8 +108,8 @@ public class LoginActivity extends AppCompatActivity {
     class HttpCallBack extends HttpRequestListener {
 
         @Override
-        public void onSuccess(org.json.JSONObject jsonObject) {
-            AppBean<User> appBean = JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<User>>() {
+        public void onSuccess(String resutl) {
+            AppBean<User> appBean = JSONObject.parseObject(resutl, new TypeReference<AppBean<User>>() {
             });
             int enumcode = appBean.getEnumcode();
             if (enumcode == 0) {

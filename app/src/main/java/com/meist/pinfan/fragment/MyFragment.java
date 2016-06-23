@@ -14,6 +14,9 @@ import com.meist.pinfan.R;
 import com.meist.pinfan.activity.LoginActivity;
 import com.meist.pinfan.activity.MainActivity;
 import com.meist.pinfan.activity.MyCollectActivity;
+import com.meist.pinfan.activity.MyOrderActivity;
+import com.meist.pinfan.activity.MyRedpacketActivity;
+import com.meist.pinfan.activity.PresentActivity;
 import com.meist.pinfan.activity.ResetPwdActivity;
 import com.meist.pinfan.utils.SharedPreferencesUtils;
 import com.meist.pinfan.utils.ToastUtils;
@@ -23,29 +26,18 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 /**
- * Package：com.meist.pinfan.utils
+ * Package：com.meist.pinfan.fragment
  * 作  用：个人中心
  * Author：wxianing
  * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_my)
-public class MyFragment extends BaseFragment implements View.OnClickListener {
-
+public class MyFragment extends BaseFragment {
 
     @ViewInject(R.id.title_tv)
     private TextView title;
     @ViewInject(R.id.back_arrows)
     private ImageView backImg;
-
-    @ViewInject(R.id.logout)
-    private LinearLayout logout;//退出登录
-    @ViewInject(R.id.reset_password)
-    private LinearLayout resetPwd;//修改密码
-
-    @ViewInject(R.id.mycollect_layout)
-    private LinearLayout mycollect;
-    @ViewInject(R.id.mypurse_layout)
-    private LinearLayout mypurse;
 
     public MyFragment() {
     }
@@ -62,35 +54,46 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         backImg.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onInitEvent() {
-        super.onInitEvent();
-        logout.setOnClickListener(this);
-        resetPwd.setOnClickListener(this);
-        mypurse.setOnClickListener(this);
-        mycollect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.show(getActivity(), "点击了收藏");
-                startActivity(new Intent(getActivity(), MyCollectActivity.class));
-            }
-        });
-    }
 
-//    @Event(value = R.id.mycollect_layout)
-//    private void click(View v){
-//        ToastUtils.show(getActivity(), "点击了收藏");
-//        startActivity(new Intent(getActivity(), MyCollectActivity.class));
-//    }
-
-    @Override
-    public void onClick(View v) {
+    @Event(value = {R.id.mypurse_layout, R.id.mycollect_layout, R.id.my_order, R.id.get_present, R.id.send_present, R.id.logout, R.id.reset_password})
+    private void click(View v) {
         Intent intent = null;
         switch (v.getId()) {
+            case R.id.mypurse_layout://我的红包
+//                ToastUtils.show(getActivity(), "我的红包");
+                intent = new Intent(getActivity(), MyRedpacketActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mycollect_layout://我的收藏
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
+                break;
+
+            case R.id.my_order://查看订单
+//                ToastUtils.show(getActivity(), "查看订单");
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.get_present:
+                ToastUtils.show(getActivity(), "收到礼物");
+                intent = new Intent(getActivity(), PresentActivity.class);
+                intent.putExtra("sType", 1);
+                startActivity(intent);
+                break;
+
+            case R.id.send_present:
+                ToastUtils.show(getActivity(), "发出礼物");
+                intent = new Intent(getActivity(), PresentActivity.class);
+                intent.putExtra("sType", 2);
+                startActivity(intent);
+                break;
+
             case R.id.reset_password://修改密码
                 startActivity(new Intent(getActivity(), ResetPwdActivity.class));
                 break;
-            case R.id.logout:
+
+            case R.id.logout://退出登录
                 SharedPreferencesUtils.setLoginTag(getActivity(), false);//取消默认登录
                 intent = new Intent(getActivity(), LoginActivity.class);
                 if (MainActivity.mainActivity != null) {
@@ -99,9 +102,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 }
                 startActivity(intent);
                 break;
-            case R.id.mypurse_layout:
-                ToastUtils.show(getActivity(), "点击了钱包");
-                break;
         }
     }
+
 }

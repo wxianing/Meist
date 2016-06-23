@@ -12,7 +12,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Utility.setTranslucentStatus(this,true);
+//        Utility.setTranslucentStatus(this,true);
 //        Utility.setActionBar(this);
         x.view().inject(this);
         onInitView();

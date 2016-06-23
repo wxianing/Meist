@@ -1,5 +1,6 @@
 package com.meist.pinfan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meist.pinfan.R;
+import com.meist.pinfan.activity.CaixiCommentActivity;
+import com.meist.pinfan.activity.MessNoticeActivity;
 import com.meist.pinfan.http.HttpRequestListener;
 import com.meist.pinfan.http.HttpRequestUtils;
 import com.meist.pinfan.utils.Constant;
 
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.HashMap;
@@ -38,28 +42,27 @@ public class MessFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView();
-        initData();
     }
 
-    private void initView() {
-        title.setText("我的评价");
+    @Override
+    public void onInitView() {
+        super.onInitView();
+        title.setText("我的消息");
         backImg.setVisibility(View.GONE);
     }
 
-    private void initData() {
-
-        HashMap params = new HashMap();
-        params.put("Keyword", "");
-        params.put("sType", 0);
-        params.put("PageIndex", 1);
-        params.put("PageSize", 10);
-
-        HttpRequestUtils.getmInstance().send(Constant.VIDEO_LIST_URL, params, new HttpRequestListener() {
-            @Override
-            public void onSuccess(JSONObject jsonObject) {
-                Log.e("jsonObject", jsonObject.toString());
-            }
-        });
+    @Event(value = {R.id.caixi_comment, R.id.message_notice})
+    private void onClck(View v) {
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.caixi_comment:
+                intent = new Intent(getActivity(), CaixiCommentActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.message_notice:
+                intent = new Intent(getActivity(), MessNoticeActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

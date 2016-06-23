@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public abstract class HttpRequestListener {
 
-    public abstract void onSuccess(JSONObject jsonObject);
+    public abstract void onSuccess(String result);
 
     public void onFail(VolleyError volleyError) {
     }

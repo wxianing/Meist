@@ -55,10 +55,10 @@ public class ShopDetailsActivity extends BaseActivity {
         super.onInitData();
         HashMap params = new HashMap();
         params.put("Id", oid);
-        HttpRequestUtils.getmInstance().send(Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance(ShopDetailsActivity.this).send(Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                AppBean<ShopDetails> appBean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(), new TypeReference<AppBean<ShopDetails>>() {
+            public void onSuccess(String result) {
+                AppBean<ShopDetails> appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBean<ShopDetails>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     sendDataView(appBean.getData());
@@ -70,7 +70,7 @@ public class ShopDetailsActivity extends BaseActivity {
     private void sendDataView(ShopDetails data) {
         ImageLoader.getInstance().displayImage(data.getPhoto(), bannerImg, MyApplication.options);
         shopName.setText(data.getStructureName());
-        linkMan.setText("联系人:"+data.getLinkMan());
+        linkMan.setText("联系人:" + data.getLinkMan());
         linkPhone.setText("联系电话:" + data.getPhone());
     }
 

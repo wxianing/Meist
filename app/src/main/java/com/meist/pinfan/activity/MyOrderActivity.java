@@ -2,6 +2,7 @@ package com.meist.pinfan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,12 +13,13 @@ import com.alibaba.fastjson.TypeReference;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.meist.pinfan.R;
-import com.meist.pinfan.adapter.ClassifyListAdapter;
+import com.meist.pinfan.adapter.MyOrderAdapter;
 import com.meist.pinfan.http.HttpRequestListener;
 import com.meist.pinfan.http.HttpRequestUtils;
 import com.meist.pinfan.model.AppBean;
-import com.meist.pinfan.model.ClassifyLists;
+import com.meist.pinfan.model.Order;
 import com.meist.pinfan.utils.Constant;
+import com.meist.pinfan.utils.LogUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -27,59 +29,65 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Package：com.meist.pinfan.activity
- * 作  用：
- * Author：wxianing
- * 时  间：2016/6/18
- */
-@ContentView(R.layout.activity_caixi_list)
-public class CaixiListActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2<ListView>, AdapterView.OnItemClickListener {
+@ContentView(R.layout.activity_my_order)
+public class MyOrderActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2<ListView>, AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.title_tv)
     private TextView title;
+
     @ViewInject(R.id.listView)
     private PullToRefreshListView mListView;
-    private List<ClassifyLists.DataListBean> mData;
-    private ClassifyListAdapter mAdapter;
+    private List<Order.DataListBean> mDatas;
+
+    private MyOrderAdapter mAdapter;
+
     private int pageIndex = 1;
-    private int sType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData(pageIndex);
-        initEvent();
     }
 
     @Override
     public void onInitView() {
-        title.setText("商品列表");
-        sType = getIntent().getIntExtra("sType", 0);
+        super.onInitView();
+        title.setText("我的订单");
         mListView.setMode(PullToRefreshBase.Mode.BOTH);
-        mData = new ArrayList<>();
-        mAdapter = new ClassifyListAdapter(mData, this);
+        mDatas = new ArrayList<>();
+        mAdapter = new MyOrderAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
+
     }
 
-    private void initEvent() {
+    @Override
+    public void onInitEvent() {
+        super.onInitEvent();
         mListView.setOnRefreshListener(this);
         mListView.setOnItemClickListener(this);
     }
 
+    @Override
+    public void onInitData() {
+        super.onInitData();
+        initData(pageIndex);
+    }
+
     private void initData(int pageIndex) {
         HashMap params = new HashMap();
+
+        params.put("status", 0);
         params.put("Keyword", "");
-        params.put("sType", sType);
+        params.put("sType", 0);
         params.put("PageIndex", pageIndex);
         params.put("PageSize", 10);
-        HttpRequestUtils.getmInstance(CaixiListActivity.this).send(Constant.CLASSIFY_LIST_URL, params, new HttpRequestListener() {
+
+        HttpRequestUtils.getmInstance(MyOrderActivity.this).send(Constant.ORDER_LIST_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
-                AppBean<ClassifyLists> appBean = JSONObject.parseObject(result, new TypeReference<AppBean<ClassifyLists>>() {
+                AppBean<Order> appBean = JSONObject.parseObject(result, new TypeReference<AppBean<Order>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
-                    mData.addAll(appBean.getData().getDataList());
+                    mDatas.addAll(appBean.getData().getDataList());
                     mAdapter.notifyDataSetChanged();
                     mListView.onRefreshComplete();
                 }
@@ -87,13 +95,8 @@ public class CaixiListActivity extends BaseActivity implements PullToRefreshBase
         });
     }
 
-    /**
-     * 点击事件
-     *
-     * @param v
-     */
-    @Event(value = {R.id.back_arrows})
-    private void getClick(View v) {
+    @Event(R.id.back_arrows)
+    private void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_arrows:
                 finish();
@@ -104,7 +107,7 @@ public class CaixiListActivity extends BaseActivity implements PullToRefreshBase
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
         pageIndex = 1;
-        mData.clear();
+        mDatas.clear();
         initData(pageIndex);
     }
 
@@ -116,9 +119,8 @@ public class CaixiListActivity extends BaseActivity implements PullToRefreshBase
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int oid = mData.get(position).getId();
-        Intent intent = new Intent(CaixiListActivity.this, ProductDetailsActivity.class);
-        intent.putExtra("OID", oid);
+        Intent intent = new Intent(this, OrderDetailsActivity.class);
+        intent.putExtra("OID", mDatas.get(position - 1).getId());
         startActivity(intent);
     }
 }

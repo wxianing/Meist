@@ -73,12 +73,12 @@ public class ResetPwdActivity extends BaseActivity implements View.OnClickListen
                     HashMap params = new HashMap();
                     params.put("OldPassword", oidPwd);
                     params.put("NewPassword", newPwd);
-                    HttpRequestUtils.getmInstance().send(Constant.UPDATE_PWD_URL, params, new HttpRequestListener() {
+                    HttpRequestUtils.getmInstance(ResetPwdActivity.this).send(Constant.UPDATE_PWD_URL, params, new HttpRequestListener() {
                         @Override
-                        public void onSuccess(JSONObject jsonObject) {
-                            Log.e(TAG, jsonObject.toString());
+                        public void onSuccess(String result) {
+                            Log.e(TAG, result.toString());
                             try {
-                                JSONObject obj = new JSONObject(jsonObject.toString());
+                                JSONObject obj = new JSONObject(result);
                                 int enumcode = obj.getInt("enumcode");
                                 if (enumcode == 0) {
                                     ToastUtils.show(ResetPwdActivity.this, "密码修改成功");
