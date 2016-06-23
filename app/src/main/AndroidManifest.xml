@@ -38,7 +38,8 @@
         <activity android:name=".activity.MyRedpacketActivity" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.PresentActivity" />
-        <activity android:name=".activity.OrderDetailsActivity"></activity>
+        <activity android:name=".activity.OrderDetailsActivity" />
+        <activity android:name=".activity.FriendsActivity"></activity>
     </application>
 
 </manifest>

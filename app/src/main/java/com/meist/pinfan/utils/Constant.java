@@ -46,4 +46,8 @@ public class Constant {
     public static final String ORDER_LIST_URL = BASE_URL + "order/order/getorderlist";
     //订单详情
     public static final String ORDER_DETAILS_URL = BASE_URL + "order/order/getorder";
+    //礼物列表
+    public static final String GIFT_LIST_URL = BASE_URL + "common/user/giftlistajax";
+    //好友列表
+    public static final String FRIENDS_LIST_URL = BASE_URL + "common/user/getmyfriendlist";
 }

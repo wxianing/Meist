@@ -76,14 +76,12 @@ public class MyFragment extends BaseFragment {
                 break;
 
             case R.id.get_present:
-                ToastUtils.show(getActivity(), "收到礼物");
                 intent = new Intent(getActivity(), PresentActivity.class);
                 intent.putExtra("sType", 1);
                 startActivity(intent);
                 break;
 
             case R.id.send_present:
-                ToastUtils.show(getActivity(), "发出礼物");
                 intent = new Intent(getActivity(), PresentActivity.class);
                 intent.putExtra("sType", 2);
                 startActivity(intent);
