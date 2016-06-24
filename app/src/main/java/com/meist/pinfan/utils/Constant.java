@@ -50,4 +50,10 @@ public class Constant {
     public static final String GIFT_LIST_URL = BASE_URL + "common/user/giftlistajax";
     //好友列表
     public static final String FRIENDS_LIST_URL = BASE_URL + "common/user/getmyfriendlist";
+    //获取礼物列表
+    public static final String GIFT_LISTS_URL = BASE_URL + "product/product/getgiftlist";
+    //发送礼物
+    public static final String SEND_GIFT_URL = BASE_URL + "product/product/sendgift";
+    //保存订单
+    public static final String SAVE_ORDER_URL = BASE_URL + "order/order/ordersave";
 }

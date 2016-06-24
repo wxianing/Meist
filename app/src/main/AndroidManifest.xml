@@ -39,7 +39,8 @@
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.PresentActivity" />
         <activity android:name=".activity.OrderDetailsActivity" />
-        <activity android:name=".activity.FriendsActivity"></activity>
+        <activity android:name=".activity.FriendsActivity" />
+        <activity android:name=".activity.GiftListsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,10 @@
 package com.meist.pinfan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_friends)
-public class FriendsActivity extends BaseActivity {
+public class FriendsActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.title_tv)
     private TextView title;
@@ -50,6 +53,12 @@ public class FriendsActivity extends BaseActivity {
     }
 
     @Override
+    public void onInitEvent() {
+        super.onInitEvent();
+        mListView.setOnItemClickListener(this);
+    }
+
+    @Override
     public void onInitData() {
         super.onInitData();
         HttpRequestUtils.getmInstance(FriendsActivity.this).send(Constant.FRIENDS_LIST_URL, null, new HttpRequestListener() {
@@ -71,7 +80,15 @@ public class FriendsActivity extends BaseActivity {
             case R.id.back_arrows:
                 finish();
                 break;
-
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int userId = mDatas.get(position).getUserId();
+        Log.e("userId", ">>>" + userId);
+        Intent intent = new Intent(this, GiftListsActivity.class);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
     }
 }

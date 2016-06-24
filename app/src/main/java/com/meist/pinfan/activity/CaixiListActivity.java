@@ -116,7 +116,7 @@ public class CaixiListActivity extends BaseActivity implements PullToRefreshBase
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int oid = mData.get(position).getId();
+        int oid = mData.get(position - 1).getId();
         Intent intent = new Intent(CaixiListActivity.this, ProductDetailsActivity.class);
         intent.putExtra("OID", oid);
         startActivity(intent);

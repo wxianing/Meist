@@ -2,13 +2,12 @@ package com.meist.pinfan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
@@ -17,15 +16,18 @@ import com.meist.pinfan.adapter.ImageAadpter;
 import com.meist.pinfan.http.HttpRequestListener;
 import com.meist.pinfan.http.HttpRequestUtils;
 import com.meist.pinfan.model.AppBean;
+import com.meist.pinfan.model.Bean;
 import com.meist.pinfan.model.ProductDetails;
+import com.meist.pinfan.model.ProductEntitys;
+import com.meist.pinfan.model.User;
 import com.meist.pinfan.utils.Constant;
+import com.meist.pinfan.utils.LogUtils;
+import com.meist.pinfan.utils.SharedPreferencesUtils;
 import com.meist.pinfan.utils.ToastUtils;
 import com.meist.pinfan.view.AutoAdjustHeightImageView;
 import com.meist.pinfan.view.MeasureListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -116,13 +118,35 @@ public class ProductDetailsActivity extends BaseActivity {
             case R.id.collect_btn:
                 sendCollectMsg();
                 break;
-            case R.id.submit_order:
-
-                break;
             case R.id.shop_layout:
                 intent = new Intent(this, ShopDetailsActivity.class);
                 intent.putExtra("OID", appBean.getData().getPdt_SortOction().getStructureId());
                 startActivity(intent);
+                break;
+            case R.id.submit_order:
+                User user = SharedPreferencesUtils.getUser(ProductDetailsActivity.this);
+                String price = producePrice.getText().toString().trim();
+                List<ProductEntitys> list = new ArrayList<>();
+
+                HashMap params = new HashMap();
+
+                params.put("ProductId", oid);
+                params.put("ProductEntityId", 1);
+                params.put("Qty", 1);
+                params.put("Price", appBean.getData().getFemaleprice());
+                params.put("RedPacketId", 0);
+                params.put("OrderTime", datatime.getText().toString().trim());
+                params.put("TotalMoney", appBean.getData().getFemaleprice());
+                params.put("Mobile", user.getMobile());
+                params.put("detaillist", list);
+
+                HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.SAVE_ORDER_URL, params, new HttpRequestListener() {
+                    @Override
+                    public void onSuccess(String result) {
+                        LogUtils.e("oerder" + result);
+                    }
+                });
+
                 break;
         }
     }
@@ -141,21 +165,17 @@ public class ProductDetailsActivity extends BaseActivity {
         HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.COLLECT_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
-                try {
-                    JSONObject obj = new JSONObject(result);
-                    int enumcode = obj.getInt("enumcode");
-                    if (enumcode == 0) {
-                        if (value.equals("立即收藏")) {
-                            collectBtn.setText("已收藏");
-                            ToastUtils.show(ProductDetailsActivity.this, "收藏成功");
-                        }
-                        if (value.equals("已收藏")) {
-                            collectBtn.setText("立即收藏");
-                            ToastUtils.show(ProductDetailsActivity.this, "取消收藏成功");
-                        }
+                Bean bean = JSON.parseObject(result, Bean.class);
+
+                if (bean != null && bean.getEnumcode() == 0) {
+                    if (value.equals("立即收藏")) {
+                        collectBtn.setText("已收藏");
+                        ToastUtils.show(ProductDetailsActivity.this, "收藏成功");
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    if (value.equals("已收藏")) {
+                        collectBtn.setText("立即收藏");
+                        ToastUtils.show(ProductDetailsActivity.this, "取消收藏成功");
+                    }
                 }
             }
         });
@@ -167,7 +187,7 @@ public class ProductDetailsActivity extends BaseActivity {
         HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
-                appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBean<ProductDetails>>() {
+                appBean = JSONObject.parseObject(result, new TypeReference<AppBean<ProductDetails>>() {
                 });
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     sendDataView(appBean);

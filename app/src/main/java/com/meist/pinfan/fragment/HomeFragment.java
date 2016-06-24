@@ -136,14 +136,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), CaixiListActivity.class);
         switch (v.getId()) {
-            case R.id.make_friends:
+            case R.id.make_friends://拼交友
                 intent.putExtra("sType", 1);
                 break;
-            case R.id.make_foods:
-                intent.putExtra("sType", 2);
-                break;
-            case R.id.make_activity:
+            case R.id.make_foods://拼美食
                 intent.putExtra("sType", 3);
+                break;
+            case R.id.make_activity://拼活动
+                intent.putExtra("sType", 2);
                 break;
         }
         startActivity(intent);
@@ -192,4 +192,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onDestroy();
         mViewPager.stopAutoScroll();
     }
+
 }
