@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meist.pinfan.activity.SubmitOrderActivity">
+
+    <include layout="@layout/titlebar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/horizontal_full_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="支付宝支付" />
+
+        <include layout="@layout/horizontal_full_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/horizontal_full_line" />
+
+        <TextView
+            android:id="@+id/produce_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="商品：" />
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="手机号：" />
+
+        <include layout="@layout/horizontal_full_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/horizontal_full_line" />
+
+        <TextView
+            android:id="@+id/total_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="总价：" />
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/red_package"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="红包：" />
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/need_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="还需支付：" />
+
+        <include layout="@layout/horizontal_full_line" />
+    </LinearLayout>
+
+
+</LinearLayout>

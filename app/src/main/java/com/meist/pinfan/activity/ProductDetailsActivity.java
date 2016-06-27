@@ -73,6 +73,8 @@ public class ProductDetailsActivity extends BaseActivity {
     private AppBean<ProductDetails> appBean;
     @ViewInject(R.id.collect_btn)
     private Button collectBtn;
+    private int price;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,8 @@ public class ProductDetailsActivity extends BaseActivity {
      */
     @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn, R.id.shop_layout})
     private void onClick(View v) {
+
+
         Intent intent = null;
         switch (v.getId()) {
             case R.id.select_data:
@@ -125,18 +129,17 @@ public class ProductDetailsActivity extends BaseActivity {
                 break;
             case R.id.submit_order:
                 User user = SharedPreferencesUtils.getUser(ProductDetailsActivity.this);
-                String price = producePrice.getText().toString().trim();
                 List<ProductEntitys> list = new ArrayList<>();
 
                 HashMap params = new HashMap();
 
                 params.put("ProductId", oid);
-                params.put("ProductEntityId", 1);
+                params.put("ProductEntityId", oid);
                 params.put("Qty", 1);
-                params.put("Price", appBean.getData().getFemaleprice());
+                params.put("Price", price);
                 params.put("RedPacketId", 0);
                 params.put("OrderTime", datatime.getText().toString().trim());
-                params.put("TotalMoney", appBean.getData().getFemaleprice());
+                params.put("TotalMoney", price);
                 params.put("Mobile", user.getMobile());
                 params.put("detaillist", list);
 
@@ -144,6 +147,13 @@ public class ProductDetailsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String result) {
                         LogUtils.e("oerder" + result);
+                        Bean bean = JSON.parseObject(result, Bean.class);
+                        if (bean != null && bean.getEnumcode() == 0) {
+                            Intent intent = new Intent(ProductDetailsActivity.this, SubmitOrderActivity.class);
+                            intent.putExtra("PRODUCENAME", appBean.getData().getName());
+                            intent.putExtra("ORDER", result);
+                            startActivity(intent);
+                        }
                     }
                 });
 
@@ -201,9 +211,22 @@ public class ProductDetailsActivity extends BaseActivity {
     }
 
     private void sendDataView(AppBean<ProductDetails> appBean) {
+        int sexType = SharedPreferencesUtils.getIntData(this, "SEX", 0);
         ImageLoader.getInstance().displayImage(appBean.getData().getIcon(), bannerImg, MyApplication.options);
         produceName.setText(appBean.getData().getName());
-        producePrice.setText("￥" + appBean.getData().getFemaleprice());//男女价格不同
+
+        price = -1;
+        switch (sexType) {
+            case 1:
+                price = appBean.getData().getManprice();
+                break;
+            case 2:
+                price = appBean.getData().getFemaleprice();
+                break;
+
+        }
+        producePrice.setText("￥" + price);//男女价格不同
+
         joinCount.setText("报名人数(男：" + appBean.getData().getMansum() + "人/女：" + appBean.getData().getFemalesum() + "人)");
         shopName.setText(appBean.getData().getPdt_SortOction().getStructureName());
         phoneNum.setText(appBean.getData().getPdt_SortOction().getPhone());

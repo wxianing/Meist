@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.meist.pinfan.R;
+import com.meist.pinfan.utils.ToastUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -26,6 +27,7 @@ public class MyRedpacketActivity extends BaseActivity {
     public void onInitView() {
         super.onInitView();
         title.setText("我的红包");
+        ToastUtils.show(MyRedpacketActivity.this, "暂无可用红包");
     }
 
     @Event(R.id.back_arrows)

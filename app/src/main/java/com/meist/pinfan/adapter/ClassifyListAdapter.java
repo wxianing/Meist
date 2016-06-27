@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
 import com.meist.pinfan.model.ClassifyLists;
+import com.meist.pinfan.utils.SharedPreferencesUtils;
 import com.meist.pinfan.view.AutoAdjustHeightImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -24,8 +25,12 @@ import java.util.List;
  * 时  间：2016/6/16
  */
 public class ClassifyListAdapter extends BasicAdapter<ClassifyLists.DataListBean> {
+    private int sexType;
+    private int myPrice;
+
     public ClassifyListAdapter(List<ClassifyLists.DataListBean> mData, Context context) {
         super(mData, context);
+        sexType = SharedPreferencesUtils.getIntData(context, "SEX", 0);
     }
 
     @Override
@@ -42,7 +47,15 @@ public class ClassifyListAdapter extends BasicAdapter<ClassifyLists.DataListBean
         ImageLoader.getInstance().displayImage(data.getIcon(), vh.imageView, MyApplication.options);
         vh.name.setText(data.getName());
         vh.count.setText("已参加人数：" + Integer.toString(data.getFemaleSum() + data.getManSum()) + "人");
-        vh.price.setText("￥" + Integer.toString(data.getFemalePrice()));
+        switch (sexType) {
+            case 1:
+                myPrice = data.getManPric();
+                break;
+            case 2:
+                myPrice = data.getFemalePrice();
+                break;
+        }
+        vh.price.setText("￥" + myPrice);
         return convertView;
     }
 

@@ -40,7 +40,11 @@
         <activity android:name=".activity.PresentActivity" />
         <activity android:name=".activity.OrderDetailsActivity" />
         <activity android:name=".activity.FriendsActivity" />
-        <activity android:name=".activity.GiftListsActivity"></activity>
+        <activity android:name=".activity.GiftListsActivity" />
+        <activity android:name=".activity.PersonCenterActivity" />
+        <activity android:name=".activity.SelectActivity" />
+        <activity android:name=".activity.SubmitOrderActivity" />
+        <activity android:name=".activity.RedPackageActivity"></activity>
     </application>
 
 </manifest>

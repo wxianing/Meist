@@ -10,72 +10,148 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    private int AreaId;
-    private String CreateUserCnName;
-    private int ParentType;
-    private int CreateUserId;
+
+    /**
+     * ParentId : null
+     * sex : 0
+     * AreaId : null
+     * CreateUserCnName : null
+     * ParentType : null
+     * StructureName : null
+     * CreateUserId : null
+     * UserName : ios
+     * MicroMessage : null
+     * CnName : 梁健聪
+     * Code : 337343df6bae468a8eacd93176d240cd
+     * AbroadCountryId : null
+     * PasswordSalt :
+     * BindShopState : null
+     * UpdateUserId : 210
+     * QQ : null
+     * Mobile : 136469828
+     * AreaName : null
+     * BindShopId : null
+     * UserPassword :
+     * ShopState : null
+     * EnName : null
+     * ParentMobile : null
+     * UserType : 2
+     * Parent : null
+     * AbroadStatusTime : null
+     * UpdateTime : 2016-06-20 08:34:53
+     * StudentContractNo : null
+     * UserId : 210
+     * Photo : http://wx.qlogo.cn/mmopen/SCug0ESSOHibTqEjLnnadFBpWoiaaWpEX8JTvwfGsvsES6EUHBA43jIj7DARiclMibs21aYBdGyXFQPo3zLb9ibh9Bz0whq1miaofU/0
+     * RoleName : null
+     * Status : 1
+     * HunYin : 0
+     * Email : null
+     * CreateTime : null
+     * AbroadStatus : null
+     * StudentContractTypeName : null
+     * Address : null
+     * Gender : null
+     * UpdateUserCnName : 梁健聪
+     * Remark :
+     * AbroadCountryName : null
+     */
+
+    private Object ParentId;
+    private int sex;
+    private Object AreaId;
+    private Object CreateUserCnName;
+    private Object ParentType;
+    private Object StructureName;
+    private Object CreateUserId;
     private String UserName;
-    private String MicroMessage;
+    private Object MicroMessage;
     private String CnName;
     private String Code;
-    private int AbroadCountryId;
+    private Object AbroadCountryId;
     private String PasswordSalt;
-    private int BindShopState;
+    private Object BindShopState;
     private int UpdateUserId;
-    private String QQ;
+    private Object QQ;
     private String Mobile;
-    private int BindShopId;
+    private Object AreaName;
+    private Object BindShopId;
     private String UserPassword;
-    private String EnName;
-    private String ParentMobile;
+    private Object ShopState;
+    private Object EnName;
+    private Object ParentMobile;
     private int UserType;
-    private String Parent;
-    private String AbroadStatusTime;
+    private Object Parent;
+    private Object AbroadStatusTime;
     private String UpdateTime;
-    private String StudentContractNo;
+    private Object StudentContractNo;
     private int UserId;
     private String Photo;
-    private String RoleName;
+    private Object RoleName;
     private int Status;
-    private String Email;
-    private String CreateTime;
-    private int AbroadStatus;
-    private String StudentContractTypeName;
-    private String Address;
-    private int Gender;
+    private int HunYin;
+    private Object Email;
+    private Object CreateTime;
+    private Object AbroadStatus;
+    private Object StudentContractTypeName;
+    private Object Address;
+    private Object Gender;
     private String UpdateUserCnName;
     private String Remark;
-    private String AbroadCountryName;
+    private Object AbroadCountryName;
 
-    public int getAreaId() {
+    public Object getParentId() {
+        return ParentId;
+    }
+
+    public void setParentId(Object ParentId) {
+        this.ParentId = ParentId;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public Object getAreaId() {
         return AreaId;
     }
 
-    public void setAreaId(int AreaId) {
+    public void setAreaId(Object AreaId) {
         this.AreaId = AreaId;
     }
 
-    public String getCreateUserCnName() {
+    public Object getCreateUserCnName() {
         return CreateUserCnName;
     }
 
-    public void setCreateUserCnName(String CreateUserCnName) {
+    public void setCreateUserCnName(Object CreateUserCnName) {
         this.CreateUserCnName = CreateUserCnName;
     }
 
-    public int getParentType() {
+    public Object getParentType() {
         return ParentType;
     }
 
-    public void setParentType(int ParentType) {
+    public void setParentType(Object ParentType) {
         this.ParentType = ParentType;
     }
 
-    public int getCreateUserId() {
+    public Object getStructureName() {
+        return StructureName;
+    }
+
+    public void setStructureName(Object StructureName) {
+        this.StructureName = StructureName;
+    }
+
+    public Object getCreateUserId() {
         return CreateUserId;
     }
 
-    public void setCreateUserId(int CreateUserId) {
+    public void setCreateUserId(Object CreateUserId) {
         this.CreateUserId = CreateUserId;
     }
 
@@ -87,11 +163,11 @@ public class User implements Serializable {
         this.UserName = UserName;
     }
 
-    public String getMicroMessage() {
+    public Object getMicroMessage() {
         return MicroMessage;
     }
 
-    public void setMicroMessage(String MicroMessage) {
+    public void setMicroMessage(Object MicroMessage) {
         this.MicroMessage = MicroMessage;
     }
 
@@ -111,11 +187,11 @@ public class User implements Serializable {
         this.Code = Code;
     }
 
-    public int getAbroadCountryId() {
+    public Object getAbroadCountryId() {
         return AbroadCountryId;
     }
 
-    public void setAbroadCountryId(int AbroadCountryId) {
+    public void setAbroadCountryId(Object AbroadCountryId) {
         this.AbroadCountryId = AbroadCountryId;
     }
 
@@ -127,11 +203,11 @@ public class User implements Serializable {
         this.PasswordSalt = PasswordSalt;
     }
 
-    public int getBindShopState() {
+    public Object getBindShopState() {
         return BindShopState;
     }
 
-    public void setBindShopState(int BindShopState) {
+    public void setBindShopState(Object BindShopState) {
         this.BindShopState = BindShopState;
     }
 
@@ -143,11 +219,11 @@ public class User implements Serializable {
         this.UpdateUserId = UpdateUserId;
     }
 
-    public String getQQ() {
+    public Object getQQ() {
         return QQ;
     }
 
-    public void setQQ(String QQ) {
+    public void setQQ(Object QQ) {
         this.QQ = QQ;
     }
 
@@ -159,11 +235,19 @@ public class User implements Serializable {
         this.Mobile = Mobile;
     }
 
-    public int getBindShopId() {
+    public Object getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(Object AreaName) {
+        this.AreaName = AreaName;
+    }
+
+    public Object getBindShopId() {
         return BindShopId;
     }
 
-    public void setBindShopId(int BindShopId) {
+    public void setBindShopId(Object BindShopId) {
         this.BindShopId = BindShopId;
     }
 
@@ -175,19 +259,27 @@ public class User implements Serializable {
         this.UserPassword = UserPassword;
     }
 
-    public String getEnName() {
+    public Object getShopState() {
+        return ShopState;
+    }
+
+    public void setShopState(Object ShopState) {
+        this.ShopState = ShopState;
+    }
+
+    public Object getEnName() {
         return EnName;
     }
 
-    public void setEnName(String EnName) {
+    public void setEnName(Object EnName) {
         this.EnName = EnName;
     }
 
-    public String getParentMobile() {
+    public Object getParentMobile() {
         return ParentMobile;
     }
 
-    public void setParentMobile(String ParentMobile) {
+    public void setParentMobile(Object ParentMobile) {
         this.ParentMobile = ParentMobile;
     }
 
@@ -199,19 +291,19 @@ public class User implements Serializable {
         this.UserType = UserType;
     }
 
-    public String getParent() {
+    public Object getParent() {
         return Parent;
     }
 
-    public void setParent(String Parent) {
+    public void setParent(Object Parent) {
         this.Parent = Parent;
     }
 
-    public String getAbroadStatusTime() {
+    public Object getAbroadStatusTime() {
         return AbroadStatusTime;
     }
 
-    public void setAbroadStatusTime(String AbroadStatusTime) {
+    public void setAbroadStatusTime(Object AbroadStatusTime) {
         this.AbroadStatusTime = AbroadStatusTime;
     }
 
@@ -223,11 +315,11 @@ public class User implements Serializable {
         this.UpdateTime = UpdateTime;
     }
 
-    public String getStudentContractNo() {
+    public Object getStudentContractNo() {
         return StudentContractNo;
     }
 
-    public void setStudentContractNo(String StudentContractNo) {
+    public void setStudentContractNo(Object StudentContractNo) {
         this.StudentContractNo = StudentContractNo;
     }
 
@@ -247,11 +339,11 @@ public class User implements Serializable {
         this.Photo = Photo;
     }
 
-    public String getRoleName() {
+    public Object getRoleName() {
         return RoleName;
     }
 
-    public void setRoleName(String RoleName) {
+    public void setRoleName(Object RoleName) {
         this.RoleName = RoleName;
     }
 
@@ -263,51 +355,59 @@ public class User implements Serializable {
         this.Status = Status;
     }
 
-    public String getEmail() {
+    public int getHunYin() {
+        return HunYin;
+    }
+
+    public void setHunYin(int HunYin) {
+        this.HunYin = HunYin;
+    }
+
+    public Object getEmail() {
         return Email;
     }
 
-    public void setEmail(String Email) {
+    public void setEmail(Object Email) {
         this.Email = Email;
     }
 
-    public String getCreateTime() {
+    public Object getCreateTime() {
         return CreateTime;
     }
 
-    public void setCreateTime(String CreateTime) {
+    public void setCreateTime(Object CreateTime) {
         this.CreateTime = CreateTime;
     }
 
-    public int getAbroadStatus() {
+    public Object getAbroadStatus() {
         return AbroadStatus;
     }
 
-    public void setAbroadStatus(int AbroadStatus) {
+    public void setAbroadStatus(Object AbroadStatus) {
         this.AbroadStatus = AbroadStatus;
     }
 
-    public String getStudentContractTypeName() {
+    public Object getStudentContractTypeName() {
         return StudentContractTypeName;
     }
 
-    public void setStudentContractTypeName(String StudentContractTypeName) {
+    public void setStudentContractTypeName(Object StudentContractTypeName) {
         this.StudentContractTypeName = StudentContractTypeName;
     }
 
-    public String getAddress() {
+    public Object getAddress() {
         return Address;
     }
 
-    public void setAddress(String Address) {
+    public void setAddress(Object Address) {
         this.Address = Address;
     }
 
-    public int getGender() {
+    public Object getGender() {
         return Gender;
     }
 
-    public void setGender(int Gender) {
+    public void setGender(Object Gender) {
         this.Gender = Gender;
     }
 
@@ -327,11 +427,11 @@ public class User implements Serializable {
         this.Remark = Remark;
     }
 
-    public String getAbroadCountryName() {
+    public Object getAbroadCountryName() {
         return AbroadCountryName;
     }
 
-    public void setAbroadCountryName(String AbroadCountryName) {
+    public void setAbroadCountryName(Object AbroadCountryName) {
         this.AbroadCountryName = AbroadCountryName;
     }
 }

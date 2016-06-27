@@ -16,8 +16,10 @@ import com.meist.pinfan.activity.MainActivity;
 import com.meist.pinfan.activity.MyCollectActivity;
 import com.meist.pinfan.activity.MyOrderActivity;
 import com.meist.pinfan.activity.MyRedpacketActivity;
+import com.meist.pinfan.activity.PersonCenterActivity;
 import com.meist.pinfan.activity.PresentActivity;
 import com.meist.pinfan.activity.ResetPwdActivity;
+import com.meist.pinfan.model.User;
 import com.meist.pinfan.utils.SharedPreferencesUtils;
 import com.meist.pinfan.utils.ToastUtils;
 
@@ -38,6 +40,12 @@ public class MyFragment extends BaseFragment {
     private TextView title;
     @ViewInject(R.id.back_arrows)
     private ImageView backImg;
+    @ViewInject(R.id.nick_name)
+    private TextView nickName;
+    @ViewInject(R.id.sex)
+    private TextView sex;
+    @ViewInject(R.id.phone_num)
+    private TextView phoneNum;
 
     public MyFragment() {
     }
@@ -51,16 +59,30 @@ public class MyFragment extends BaseFragment {
     public void onInitView() {
         super.onInitView();
         title.setText("个人中心");
-        backImg.setVisibility(View.GONE);
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        nickName.setText("昵称：" + SharedPreferencesUtils.getStringData(getActivity(), "NICKNAME", null));
+        int setType = SharedPreferencesUtils.getIntData(getActivity(), "SEX", 0);
+        switch (setType) {
+            case 1:
+                sex.setText("性别: " + "男");
+                break;
+            case 2:
+                sex.setText("性别: " + "女");
+                break;
+        }
+        phoneNum.setText("电话号码: " + SharedPreferencesUtils.getStringData(getActivity(), "PHONE", null));
+    }
 
-    @Event(value = {R.id.mypurse_layout, R.id.mycollect_layout, R.id.my_order, R.id.get_present, R.id.send_present, R.id.logout, R.id.reset_password})
+    @Event(value = {R.id.mypurse_layout, R.id.mycollect_layout, R.id.my_order, R.id.get_present, R.id.send_present, R.id.logout, R.id.reset_password, R.id.person_center})
     private void click(View v) {
         Intent intent = null;
         switch (v.getId()) {
             case R.id.mypurse_layout://我的红包
-//                ToastUtils.show(getActivity(), "我的红包");
                 intent = new Intent(getActivity(), MyRedpacketActivity.class);
                 startActivity(intent);
                 break;
@@ -70,7 +92,6 @@ public class MyFragment extends BaseFragment {
                 break;
 
             case R.id.my_order://查看订单
-//                ToastUtils.show(getActivity(), "查看订单");
                 intent = new Intent(getActivity(), MyOrderActivity.class);
                 startActivity(intent);
                 break;
@@ -93,14 +114,17 @@ public class MyFragment extends BaseFragment {
 
             case R.id.logout://退出登录
                 SharedPreferencesUtils.setLoginTag(getActivity(), false);//取消默认登录
-                intent = new Intent(getActivity(), LoginActivity.class);
+//                intent = new Intent(getActivity(), LoginActivity.class);
                 if (MainActivity.mainActivity != null) {
                     MainActivity.mainActivity.finish();
                     MainActivity.mainActivity = null;
                 }
-                startActivity(intent);
+//                startActivity(intent);
                 break;
+            case R.id.person_center://个人中心
+                startActivity(new Intent(getActivity(), PersonCenterActivity.class));
+                break;
+
         }
     }
-
 }

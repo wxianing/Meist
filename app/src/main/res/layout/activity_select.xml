@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meist.pinfan.activity.SelectActivity">
+
+    <include layout="@layout/titlebar" />
+
+    <LinearLayout
+        android:id="@+id/sex_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include layout="@layout/horizontal_full_line" />
+
+        <TextView
+            android:id="@+id/sex_man"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="男"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/sex_woman"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="女"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/horizontal_full_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hunyin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/hunyin_spinsterhood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="未婚"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/horizontal_full_line" />
+
+        <TextView
+            android:id="@+id/hunyin_married"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="已婚"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/horizontal_line" />
+
+        <TextView
+            android:id="@+id/hunyin_divorced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp10"
+            android:text="离异"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/horizontal_full_line" />
+    </LinearLayout>
+
+</LinearLayout>

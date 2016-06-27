@@ -45,7 +45,7 @@ public class HttpRequestUtils {
     }
 
     public void send(String url, HashMap params, final HttpRequestListener listener) {
-        CustomDialogUtils.showProgressDialog(mContext);
+//        CustomDialogUtils.showProgressDialog(mContext);
         Log.e("addParams:", JSON.toJSONString(params));
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, JSON.toJSONString(params), new Response.Listener<JSONObject>() {
             @Override

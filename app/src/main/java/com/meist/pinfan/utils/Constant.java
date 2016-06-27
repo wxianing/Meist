@@ -9,7 +9,9 @@ import com.meist.pinfan.MyApplication;
  * 时  间：2016/6/18
  */
 public class Constant {
+
     public static final String BASE_URL = "http://meistapi.meidp.com/";
+
     public static final String APPID = "102";
     //    public static final String CODE = SharedPreferencesUtils.getUser(MyApplication.getmInstance()).getCode();
     public static final String CODE = SharedPreferencesUtils.getStringData(MyApplication.getmInstance(), "CODE", null);
@@ -56,4 +58,9 @@ public class Constant {
     public static final String SEND_GIFT_URL = BASE_URL + "product/product/sendgift";
     //保存订单
     public static final String SAVE_ORDER_URL = BASE_URL + "order/order/ordersave";
+    //修改个人信息
+    public static final String UPDATE_MESSAGE = BASE_URL + "common/user/update";
+    //红包列表
+    public static final String RED_PACKAGE_LIST = BASE_URL + "common/user/getredpacketlist";
+
 }

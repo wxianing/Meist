@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         mCallBack = new HttpCallBack();
         //自动登录
         boolean isLogin = SharedPreferencesUtils.getLoginTag(this);
-        if (isLogin) {
+        if (false) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
@@ -113,6 +113,12 @@ public class LoginActivity extends AppCompatActivity {
             });
             int enumcode = appBean.getEnumcode();
             if (enumcode == 0) {
+                SharedPreferencesUtils.saveStringData(LoginActivity.this, "NICKNAME", appBean.getData().getCnName());
+                SharedPreferencesUtils.saveStringData(LoginActivity.this, "PHONE", appBean.getData().getMobile());
+                SharedPreferencesUtils.saveIntData(LoginActivity.this, "SEX", appBean.getData().getSex());
+                SharedPreferencesUtils.saveIntData(LoginActivity.this, "HUNYIN", appBean.getData().getHunYin());
+
+
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "USERNAME", userName);
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "PASSWORD", passWord);
                 SharedPreferencesUtils.saveUser(LoginActivity.this, appBean.getData());
