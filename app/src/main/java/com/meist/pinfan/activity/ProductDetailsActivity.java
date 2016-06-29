@@ -3,6 +3,7 @@ package com.meist.pinfan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -38,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @ContentView(R.layout.activity_product_details)
-public class ProductDetailsActivity extends BaseActivity {
+public class ProductDetailsActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private int oid;
     @ViewInject(R.id.title_tv)
@@ -92,13 +93,13 @@ public class ProductDetailsActivity extends BaseActivity {
         bannerImg.setFocusableInTouchMode(true);
         bannerImg.requestFocus();
 
-
         mDatas = new ArrayList<>();
         mAdapter = new CaixiDetailAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
         imageUrls = new ArrayList<>();
         imageAadpter = new ImageAadpter(imageUrls, this);
         imgListView.setAdapter(imageAadpter);
+        imgListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -114,7 +115,6 @@ public class ProductDetailsActivity extends BaseActivity {
      */
     @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn, R.id.shop_layout, R.id.total_comment})
     private void onClick(View v) {
-
 
         Intent intent = null;
         switch (v.getId()) {
@@ -271,5 +271,13 @@ public class ProductDetailsActivity extends BaseActivity {
                 datatime.setText(result);
             }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String imageUrl = imageUrls.get(position);
+        Intent intent = new Intent(ProductDetailsActivity.this, ScanImgActivity.class);
+        intent.putExtra("IMAGEURL", imageUrl);
+        startActivity(intent);
     }
 }

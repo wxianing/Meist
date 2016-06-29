@@ -46,7 +46,8 @@
         <activity android:name=".activity.SubmitOrderActivity" />
         <activity android:name=".activity.RedPackageActivity" />
         <activity android:name=".activity.ProduceCommentActivity" />
-        <activity android:name=".activity.PublishCommentActivity"></activity>
+        <activity android:name=".activity.PublishCommentActivity" />
+        <activity android:name=".activity.ScanImgActivity"></activity>
     </application>
 
 </manifest>
