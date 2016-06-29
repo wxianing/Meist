@@ -68,14 +68,6 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
 
         ImageLoader.getInstance().displayImage(imageUrls.get(getPosition(position)).getPhoto(), holder.imageView, MyApplication.options);
 
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, BannerDetailActivity.class);
-//                intent.putExtra("link", imageUrls.get(getPosition(count)).getLink());
-//                context.startActivity(intent);
-//            }
-//        });
         return view;
     }
 

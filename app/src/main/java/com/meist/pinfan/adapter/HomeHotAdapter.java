@@ -29,6 +29,11 @@ public class HomeHotAdapter extends BasicAdapter<HotLists> {
     }
 
     @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
     public View createView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
 

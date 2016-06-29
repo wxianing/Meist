@@ -61,7 +61,7 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
     @Override
     public void onInitData() {
         super.onInitData();
-        HttpRequestUtils.getmInstance(FriendsActivity.this).send(Constant.FRIENDS_LIST_URL, null, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(FriendsActivity.this,Constant.FRIENDS_LIST_URL, null, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBeans<FriendLists> appBeans = JSONObject.parseObject(result, new TypeReference<AppBeans<FriendLists>>() {

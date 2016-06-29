@@ -15,7 +15,7 @@ public class NetworkUtils {
 	/*
 	 * 判断是否有网络
 	 */
-	public boolean isNetworkAvailable(Context context) {
+	public static boolean isNetworkAvailable(Context context) {
 		ConnectivityManager cm = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		if (cm == null) {

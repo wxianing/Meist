@@ -73,7 +73,7 @@ public class ResetPwdActivity extends BaseActivity implements View.OnClickListen
                     HashMap params = new HashMap();
                     params.put("OldPassword", oidPwd);
                     params.put("NewPassword", newPwd);
-                    HttpRequestUtils.getmInstance(ResetPwdActivity.this).send(Constant.UPDATE_PWD_URL, params, new HttpRequestListener() {
+                    HttpRequestUtils.getmInstance().send(ResetPwdActivity.this,Constant.UPDATE_PWD_URL, params, new HttpRequestListener() {
                         @Override
                         public void onSuccess(String result) {
                             Log.e(TAG, result.toString());

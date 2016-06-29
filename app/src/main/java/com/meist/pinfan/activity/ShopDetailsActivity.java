@@ -55,7 +55,7 @@ public class ShopDetailsActivity extends BaseActivity {
         super.onInitData();
         HashMap params = new HashMap();
         params.put("Id", oid);
-        HttpRequestUtils.getmInstance(ShopDetailsActivity.this).send(Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(ShopDetailsActivity.this,Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBean<ShopDetails> appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBean<ShopDetails>>() {

@@ -71,7 +71,7 @@ public class ForgetSecondActivity extends BaseActivity {
         params.put("Mobile",phoneNum);
         params.put("Code",authCore);
         params.put("NewPassword",authCore);
-        HttpRequestUtils.getmInstance(ForgetSecondActivity.this).send(Constant.FORGET_PASSWORD_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(ForgetSecondActivity.this,Constant.FORGET_PASSWORD_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
 

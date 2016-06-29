@@ -9,9 +9,10 @@ import java.io.Serializable;
  * 时  间：2016/6/24
  */
 public class Bean implements Serializable {
+
     private int code;
     private int enumcode;
-    private String success;
+    private String msg;
 
     public int getCode() {
         return code;
@@ -29,11 +30,11 @@ public class Bean implements Serializable {
         this.enumcode = enumcode;
     }
 
-    public String getSuccess() {
-        return success;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

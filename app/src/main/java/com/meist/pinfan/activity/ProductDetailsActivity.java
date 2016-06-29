@@ -73,7 +73,9 @@ public class ProductDetailsActivity extends BaseActivity {
     private AppBean<ProductDetails> appBean;
     @ViewInject(R.id.collect_btn)
     private Button collectBtn;
-    private int price;
+    private double price;
+    @ViewInject(R.id.total_comment)
+    private TextView totalComment;//评论数
 
 
     @Override
@@ -86,6 +88,11 @@ public class ProductDetailsActivity extends BaseActivity {
         super.onInitView();
         title.setText("商品详情");
         oid = getIntent().getIntExtra("OID", 0);
+        bannerImg.setFocusable(true);
+        bannerImg.setFocusableInTouchMode(true);
+        bannerImg.requestFocus();
+
+
         mDatas = new ArrayList<>();
         mAdapter = new CaixiDetailAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -105,7 +112,7 @@ public class ProductDetailsActivity extends BaseActivity {
      *
      * @param v
      */
-    @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn, R.id.shop_layout})
+    @Event(value = {R.id.back_arrows, R.id.select_data, R.id.submit_order, R.id.collect_btn, R.id.shop_layout, R.id.total_comment})
     private void onClick(View v) {
 
 
@@ -128,39 +135,54 @@ public class ProductDetailsActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.submit_order:
-                User user = SharedPreferencesUtils.getUser(ProductDetailsActivity.this);
-                List<ProductEntitys> list = new ArrayList<>();
-
-                HashMap params = new HashMap();
-
-                params.put("ProductId", oid);
-                params.put("ProductEntityId", oid);
-                params.put("Qty", 1);
-                params.put("Price", price);
-                params.put("RedPacketId", 0);
-                params.put("OrderTime", datatime.getText().toString().trim());
-                params.put("TotalMoney", price);
-                params.put("Mobile", user.getMobile());
-                params.put("detaillist", list);
-
-                HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.SAVE_ORDER_URL, params, new HttpRequestListener() {
-                    @Override
-                    public void onSuccess(String result) {
-                        LogUtils.e("oerder" + result);
-                        Bean bean = JSON.parseObject(result, Bean.class);
-                        if (bean != null && bean.getEnumcode() == 0) {
-                            Intent intent = new Intent(ProductDetailsActivity.this, SubmitOrderActivity.class);
-                            intent.putExtra("PRODUCENAME", appBean.getData().getName());
-                            intent.putExtra("ORDER", result);
-                            startActivity(intent);
-                        }
-                    }
-                });
-
+                submitOrder();
+                break;
+            case R.id.total_comment:
+                intent = new Intent(this, ProduceCommentActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
+    //提交订单
+    private void submitOrder() {
+        User user = SharedPreferencesUtils.getUser(ProductDetailsActivity.this);
+        String dateTime = datatime.getText().toString().trim();
+        if (dateTime.equals("请选择预定日期")) {
+            ToastUtils.show(ProductDetailsActivity.this, "请选择预定日期");
+            return;
+        }
+
+        List<ProductEntitys> list = new ArrayList<>();
+
+        HashMap params = new HashMap();
+
+        params.put("ProductId", oid);
+        params.put("ProductEntityId", oid);
+        params.put("Qty", 1);
+        params.put("Price", price);
+        params.put("RedPacketId", 0);
+        params.put("OrderTime", dateTime);
+        params.put("TotalMoney", price);
+        params.put("Mobile", user.getMobile());
+        params.put("detaillist", list);
+
+        HttpRequestUtils.getmInstance().send(ProductDetailsActivity.this, Constant.SAVE_ORDER_URL, params, new HttpRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                LogUtils.e("oerder" + result);
+                Bean bean = JSON.parseObject(result, Bean.class);
+                if (bean != null && bean.getEnumcode() == 0) {
+                    Intent intent = new Intent(ProductDetailsActivity.this, SubmitOrderActivity.class);
+                    intent.putExtra("PRODUCENAME", appBean.getData().getName());
+                    intent.putExtra("ORDER", result);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    //收藏
     private void sendCollectMsg() {
         int isCollect = 0;
         HashMap params = new HashMap();
@@ -169,10 +191,12 @@ public class ProductDetailsActivity extends BaseActivity {
         final String value = collectBtn.getText().toString().trim();
         if (value.equals("立即收藏")) {
             params.put("IsCollect", 1);//1.收藏
-        } else {
+        }
+
+        if (value.equals("已收藏")) {
             params.put("IsCollect", 0);//0.取消
         }
-        HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.COLLECT_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(ProductDetailsActivity.this, Constant.COLLECT_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 Bean bean = JSON.parseObject(result, Bean.class);
@@ -186,15 +210,18 @@ public class ProductDetailsActivity extends BaseActivity {
                         collectBtn.setText("立即收藏");
                         ToastUtils.show(ProductDetailsActivity.this, "取消收藏成功");
                     }
+                } else {
+                    ToastUtils.show(ProductDetailsActivity.this, bean.getMsg());
                 }
             }
         });
     }
 
+    //请求数据
     private void initData() {
         HashMap params = new HashMap();
         params.put("id", oid);
-        HttpRequestUtils.getmInstance(ProductDetailsActivity.this).send(Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(ProductDetailsActivity.this, Constant.CAIXI_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 appBean = JSONObject.parseObject(result, new TypeReference<AppBean<ProductDetails>>() {
@@ -210,6 +237,7 @@ public class ProductDetailsActivity extends BaseActivity {
         });
     }
 
+    //给控件赋值
     private void sendDataView(AppBean<ProductDetails> appBean) {
         int sexType = SharedPreferencesUtils.getIntData(this, "SEX", 0);
         ImageLoader.getInstance().displayImage(appBean.getData().getIcon(), bannerImg, MyApplication.options);
@@ -231,6 +259,7 @@ public class ProductDetailsActivity extends BaseActivity {
         shopName.setText(appBean.getData().getPdt_SortOction().getStructureName());
         phoneNum.setText(appBean.getData().getPdt_SortOction().getPhone());
         linkMan.setText(appBean.getData().getPdt_SortOction().getLinkMan());
+        totalComment.setText("共有" + appBean.getData().getTotalComment() + "人评价");
     }
 
     @Override

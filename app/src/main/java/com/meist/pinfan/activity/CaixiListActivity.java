@@ -73,7 +73,7 @@ public class CaixiListActivity extends BaseActivity implements PullToRefreshBase
         params.put("sType", sType);
         params.put("PageIndex", pageIndex);
         params.put("PageSize", 10);
-        HttpRequestUtils.getmInstance(CaixiListActivity.this).send(Constant.CLASSIFY_LIST_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(CaixiListActivity.this,Constant.CLASSIFY_LIST_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBean<ClassifyLists> appBean = JSONObject.parseObject(result, new TypeReference<AppBean<ClassifyLists>>() {

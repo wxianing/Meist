@@ -79,9 +79,9 @@ public class MyOrderActivity extends BaseActivity implements PullToRefreshBase.O
         params.put("Keyword", "");
         params.put("sType", 0);
         params.put("PageIndex", pageIndex);
-        params.put("PageSize", 10);
+        params.put("PageSize",8);
 
-        HttpRequestUtils.getmInstance(MyOrderActivity.this).send(Constant.ORDER_LIST_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(MyOrderActivity.this,Constant.ORDER_LIST_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBean<Order> appBean = JSONObject.parseObject(result, new TypeReference<AppBean<Order>>() {

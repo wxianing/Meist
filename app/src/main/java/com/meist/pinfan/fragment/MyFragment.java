@@ -38,8 +38,6 @@ public class MyFragment extends BaseFragment {
 
     @ViewInject(R.id.title_tv)
     private TextView title;
-    @ViewInject(R.id.back_arrows)
-    private ImageView backImg;
     @ViewInject(R.id.nick_name)
     private TextView nickName;
     @ViewInject(R.id.sex)
@@ -114,12 +112,12 @@ public class MyFragment extends BaseFragment {
 
             case R.id.logout://退出登录
                 SharedPreferencesUtils.setLoginTag(getActivity(), false);//取消默认登录
-//                intent = new Intent(getActivity(), LoginActivity.class);
+                intent = new Intent(getActivity(), LoginActivity.class);
                 if (MainActivity.mainActivity != null) {
                     MainActivity.mainActivity.finish();
                     MainActivity.mainActivity = null;
                 }
-//                startActivity(intent);
+                startActivity(intent);
                 break;
             case R.id.person_center://个人中心
                 startActivity(new Intent(getActivity(), PersonCenterActivity.class));

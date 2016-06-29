@@ -3,7 +3,11 @@ package com.meist.pinfan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.alibaba.fastjson.JSONObject;
@@ -33,6 +37,7 @@ import java.util.HashMap;
  */
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
+
     public static LoginActivity loginActivity;
     private HttpCallBack mCallBack;
     @ViewInject(R.id.username_edittext)
@@ -44,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     private String passWord;
     private String user;
     private String pwd;
+    @ViewInject(R.id.checked_img)
+    private CheckBox checkBox;
+    private boolean isRmb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +59,21 @@ public class LoginActivity extends AppCompatActivity {
         x.view().inject(this);
         loginActivity = this;
         initView();
+        initEvent();
+    }
 
+    private void initEvent() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    SharedPreferencesUtils.savebooleanData(LoginActivity.this, "isRmb", true);
+
+                } else {
+                    SharedPreferencesUtils.savebooleanData(LoginActivity.this, "isRmb", false);
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -62,14 +84,28 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
-        user = SharedPreferencesUtils.getStringData(this, "USERNAME", null);
-        pwd = SharedPreferencesUtils.getStringData(this, "PASSWORD", null);
-        if (NullUtils.isNull(user)) {
-            userNameEt.setText(user);
+        //记住密码
+        isRmb = SharedPreferencesUtils.getbooleanData(LoginActivity.this, "isRmb", false);
+        if (isRmb) {
+            user = SharedPreferencesUtils.getStringData(this, "USERNAME", null);
+            pwd = SharedPreferencesUtils.getStringData(this, "PASSWORD", null);
+            checkBox.setChecked(true);
+            if (NullUtils.isNull(user)) {
+                userNameEt.setText(user);
+            }
+            if (NullUtils.isNull(pwd)) {
+                passWordEt.setText(pwd);
+            }
         }
-        if (NullUtils.isNull(pwd)) {
-            passWordEt.setText(pwd);
-        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /**
+         * 记住密码
+         */
 
     }
 
@@ -91,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("Password", passWord);
 
                 if (NullUtils.isNull(userName) && NullUtils.isNull(passWord)) {
-                    HttpRequestUtils.getmInstance(LoginActivity.this).send(Constant.LOGIN_URL, params, mCallBack);
+                    HttpRequestUtils.getmInstance().send(LoginActivity.this, Constant.LOGIN_URL, params, mCallBack);
                 } else {
                     ToastUtils.show(this, "用户名或密码不能为空!");
                 }
@@ -111,16 +147,15 @@ public class LoginActivity extends AppCompatActivity {
         public void onSuccess(String resutl) {
             AppBean<User> appBean = JSONObject.parseObject(resutl, new TypeReference<AppBean<User>>() {
             });
-            int enumcode = appBean.getEnumcode();
-            if (enumcode == 0) {
+            if (appBean != null && appBean.getEnumcode() == 0) {
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "NICKNAME", appBean.getData().getCnName());
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "PHONE", appBean.getData().getMobile());
                 SharedPreferencesUtils.saveIntData(LoginActivity.this, "SEX", appBean.getData().getSex());
                 SharedPreferencesUtils.saveIntData(LoginActivity.this, "HUNYIN", appBean.getData().getHunYin());
 
-
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "USERNAME", userName);
                 SharedPreferencesUtils.saveStringData(LoginActivity.this, "PASSWORD", passWord);
+
                 SharedPreferencesUtils.saveUser(LoginActivity.this, appBean.getData());
                 SharedPreferencesUtils.save(LoginActivity.this, "CODE", appBean.getData().getCode());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

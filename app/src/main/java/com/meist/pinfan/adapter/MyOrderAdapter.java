@@ -1,6 +1,7 @@
 package com.meist.pinfan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.meist.pinfan.MyApplication;
 import com.meist.pinfan.R;
+import com.meist.pinfan.activity.PublishCommentActivity;
 import com.meist.pinfan.model.Order;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -43,16 +45,45 @@ public class MyOrderAdapter extends BasicAdapter<Order.DataListBean> {
         ImageLoader.getInstance().displayImage(data.getThumbImg(), vh.img, MyApplication.options);
         vh.produceName.setText(data.getProductName());
         vh.orderTime.setText(data.getCreateTime());
-        vh.totalMoney.setText("￥"+data.getTotalMoney());
+        vh.totalMoney.setText("￥" + data.getTotalMoney());
         int payState = data.getPayState();
         switch (payState) {
             case 0:
-                vh.payStateTv.setText("待支付");
+                vh.payStateTv.setText("待付款");
                 break;
             case 1:
-                vh.payStateTv.setText("已支付");
+                vh.payStateTv.setText("已付款");
                 break;
         }
+
+        int status = data.getStatus();
+        switch (status) {
+            case 1:
+
+                break;
+            case 2:
+                vh.payStateTv.setText("待退款");
+                break;
+            case 3:
+                vh.payStateTv.setText("已取消");
+                vh.commentBtn.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                vh.payStateTv.setText("已完成");
+                vh.commentBtn.setVisibility(View.VISIBLE);
+                break;
+            case 6:
+                vh.payStateTv.setText("退款成功");
+                break;
+        }
+        vh.commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PublishCommentActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
 
         return convertView;
     }

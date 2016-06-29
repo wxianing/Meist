@@ -111,7 +111,7 @@ public class RegisterThirdActivity extends BaseActivity {
         params.put("Sex", getsex(sex));
         params.put("HunYin", getHunyin(hunyin));
         params.put("Mobile", phone);
-        HttpRequestUtils.getmInstance(RegisterThirdActivity.this).send(Constant.REGISTER_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(RegisterThirdActivity.this,Constant.REGISTER_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 try {

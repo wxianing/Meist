@@ -23,7 +23,6 @@
             android:id="@+id/produce_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp10"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="港式奶茶厅"
@@ -67,7 +66,8 @@
             android:focusable="false"
             android:text="立即评价"
             android:textColor="@color/text_drakgreen"
-            android:textSize="@dimen/sp12" />
+            android:textSize="@dimen/sp12"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

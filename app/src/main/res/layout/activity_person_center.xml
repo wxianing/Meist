@@ -36,7 +36,7 @@
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/header_boy_icon" />
     </RelativeLayout>
 
     <include layout="@layout/horizontal_line" />

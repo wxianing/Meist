@@ -24,7 +24,7 @@
                 android:id="@+id/header_img"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/header_boy_icon"
                 app:border_color="#0000ff00"
                 app:border_width="1dp" />
 

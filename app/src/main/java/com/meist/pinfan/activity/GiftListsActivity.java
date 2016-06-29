@@ -73,7 +73,7 @@ public class GiftListsActivity extends BaseActivity implements AdapterView.OnIte
         params.put("sType", 0);
         params.put("PageIndex", pageIndex);
         params.put("PageSize", 8);
-        HttpRequestUtils.getmInstance(GiftListsActivity.this).send(Constant.GIFT_LISTS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(GiftListsActivity.this,Constant.GIFT_LISTS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBean<Gifts> appBean = JSONObject.parseObject(result, new TypeReference<AppBean<Gifts>>() {
@@ -97,7 +97,7 @@ public class GiftListsActivity extends BaseActivity implements AdapterView.OnIte
                 params.put("Id", 0);
                 params.put("ProductId", produceId);
                 params.put("GiveToUserId", userId);
-                HttpRequestUtils.getmInstance(GiftListsActivity.this).send(Constant.SEND_GIFT_URL, params, new HttpRequestListener() {
+                HttpRequestUtils.getmInstance().send(GiftListsActivity.this,Constant.SEND_GIFT_URL, params, new HttpRequestListener() {
                     @Override
                     public void onSuccess(String result) {
                         Bean bean = JSON.parseObject(result, Bean.class);

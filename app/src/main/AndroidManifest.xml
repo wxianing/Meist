@@ -44,7 +44,9 @@
         <activity android:name=".activity.PersonCenterActivity" />
         <activity android:name=".activity.SelectActivity" />
         <activity android:name=".activity.SubmitOrderActivity" />
-        <activity android:name=".activity.RedPackageActivity"></activity>
+        <activity android:name=".activity.RedPackageActivity" />
+        <activity android:name=".activity.ProduceCommentActivity" />
+        <activity android:name=".activity.PublishCommentActivity"></activity>
     </application>
 
 </manifest>

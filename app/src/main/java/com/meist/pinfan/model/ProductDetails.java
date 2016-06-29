@@ -14,7 +14,7 @@ public class ProductDetails implements Serializable {
 
     private PdtSortOctionBean pdt_SortOction;
 
-    private int Price;
+    private double Price;
     private int sex;
     private int Comments;
     private int ID;
@@ -22,9 +22,9 @@ public class ProductDetails implements Serializable {
     private String begintime;
     private String endtime;
     private int mansum;
-    private int manprice;
+    private double manprice;
     private int femalesum;
-    private int femaleprice;
+    private double femaleprice;
     private int marriage;
     private int orderno;
     private int sortid;
@@ -45,8 +45,8 @@ public class ProductDetails implements Serializable {
     private int NumberCount;
     private int AheadDays;
     private int GradeId;
-    private Object TotalComment;
-    private Object IsHot;
+    private int TotalComment;
+    private int IsHot;
 
     private List<CaiXiDetailBean> CaiXiDetail;
     private List<?> PDT_ProductList;
@@ -61,14 +61,6 @@ public class ProductDetails implements Serializable {
 
     public void setPdt_SortOction(PdtSortOctionBean pdt_SortOction) {
         this.pdt_SortOction = pdt_SortOction;
-    }
-
-    public int getPrice() {
-        return Price;
-    }
-
-    public void setPrice(int Price) {
-        this.Price = Price;
     }
 
     public int getSex() {
@@ -127,28 +119,12 @@ public class ProductDetails implements Serializable {
         this.mansum = mansum;
     }
 
-    public int getManprice() {
-        return manprice;
-    }
-
-    public void setManprice(int manprice) {
-        this.manprice = manprice;
-    }
-
     public int getFemalesum() {
         return femalesum;
     }
 
     public void setFemalesum(int femalesum) {
         this.femalesum = femalesum;
-    }
-
-    public int getFemaleprice() {
-        return femaleprice;
-    }
-
-    public void setFemaleprice(int femaleprice) {
-        this.femaleprice = femaleprice;
     }
 
     public int getMarriage() {
@@ -311,20 +287,44 @@ public class ProductDetails implements Serializable {
         this.GradeId = GradeId;
     }
 
-    public Object getTotalComment() {
+    public int getTotalComment() {
         return TotalComment;
     }
 
-    public void setTotalComment(Object TotalComment) {
-        this.TotalComment = TotalComment;
+    public void setTotalComment(int totalComment) {
+        TotalComment = totalComment;
     }
 
-    public Object getIsHot() {
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double price) {
+        Price = price;
+    }
+
+    public double getManprice() {
+        return manprice;
+    }
+
+    public void setManprice(double manprice) {
+        this.manprice = manprice;
+    }
+
+    public double getFemaleprice() {
+        return femaleprice;
+    }
+
+    public void setFemaleprice(double femaleprice) {
+        this.femaleprice = femaleprice;
+    }
+
+    public int getIsHot() {
         return IsHot;
     }
 
-    public void setIsHot(Object IsHot) {
-        this.IsHot = IsHot;
+    public void setIsHot(int isHot) {
+        IsHot = isHot;
     }
 
     public List<CaiXiDetailBean> getCaiXiDetail() {

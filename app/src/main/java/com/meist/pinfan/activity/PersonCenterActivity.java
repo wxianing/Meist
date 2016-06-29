@@ -130,7 +130,7 @@ public class PersonCenterActivity extends BaseActivity {
                 params.put("HunYin", hyType);
                 params.put("Mobile", phone);
 
-                HttpRequestUtils.getmInstance(PersonCenterActivity.this).send(Constant.UPDATE_MESSAGE, params, new HttpRequestListener() {
+                HttpRequestUtils.getmInstance().send(PersonCenterActivity.this, Constant.UPDATE_MESSAGE, params, new HttpRequestListener() {
                     @Override
                     public void onSuccess(String result) {
                         Bean bean = JSON.parseObject(result, Bean.class);
@@ -140,6 +140,7 @@ public class PersonCenterActivity extends BaseActivity {
                             SharedPreferencesUtils.saveStringData(PersonCenterActivity.this, "PHONE", phone);
                             SharedPreferencesUtils.saveIntData(PersonCenterActivity.this, "SEX", sexTy);
                             SharedPreferencesUtils.saveIntData(PersonCenterActivity.this, "HUNYIN", hyType);
+                            finish();
                         } else {
                             ToastUtils.show(PersonCenterActivity.this, "修改成功");
                         }

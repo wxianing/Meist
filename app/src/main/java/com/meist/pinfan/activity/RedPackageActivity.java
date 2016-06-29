@@ -45,7 +45,7 @@ public class RedPackageActivity extends BaseActivity {
         super.onInitData();
         HashMap params = new HashMap();
         params.put("", totalMoney);
-        HttpRequestUtils.getmInstance(RedPackageActivity.this).send(Constant.RED_PACKAGE_LIST, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(RedPackageActivity.this,Constant.RED_PACKAGE_LIST, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 List<RedEntity.DataListBean> list = null;

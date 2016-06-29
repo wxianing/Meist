@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.android.volley.VolleyError;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.meist.pinfan.R;
 import com.meist.pinfan.activity.CaixiListActivity;
 import com.meist.pinfan.activity.ProductDetailsActivity;
@@ -24,10 +28,8 @@ import com.meist.pinfan.model.AppBeans;
 import com.meist.pinfan.model.Banner;
 import com.meist.pinfan.model.HotLists;
 import com.meist.pinfan.utils.Constant;
-import com.meist.pinfan.view.MeasureListView;
 import com.meist.pinfan.widget.AutoScrollViewPager;
 
-import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -42,7 +44,7 @@ import java.util.List;
  * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, PullToRefreshBase.OnRefreshListener2<ListView>, AdapterView.OnItemClickListener {
 
     private static final String TAG = "HomeFragment";
 
@@ -55,27 +57,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     /**
      * 头部广告
      */
-    @ViewInject(R.id.home_banner_viewpager)
     protected AutoScrollViewPager mViewPager;
-    @ViewInject(R.id.home_dot_ll)
     protected LinearLayout dotLL;
     private List<Banner> imageUrls;
     private ImagePagerAdapter pagerAdapter;
     /**
      * 中间导航栏
      */
-    @ViewInject(R.id.make_friends)
     private LinearLayout makeFriends;
-    @ViewInject(R.id.make_foods)
     private LinearLayout makeFoods;
-    @ViewInject(R.id.make_activity)
     private LinearLayout makeActivity;
 
     /**
      * 热门列表
      */
     @ViewInject(R.id.mlist_view)
-    private MeasureListView mListView;
+    private PullToRefreshListView mListView;
 
     private List<HotLists> mDatas;
     private HomeHotAdapter mAdapter;
@@ -94,6 +91,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         backImg.setVisibility(View.GONE);
         mCallBack = new CallBack();
         imageUrls = new ArrayList<>();
+        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.home_header_listveiw, null);
+//        x.view().inject(getActivity(), headerView);
+        mListView.getRefreshableView().addHeaderView(headerView);
+
+        mViewPager = (AutoScrollViewPager) headerView.findViewById(R.id.home_banner_viewpager);
+        dotLL = (LinearLayout) headerView.findViewById(R.id.home_dot_ll);
+        makeFriends = (LinearLayout) headerView.findViewById(R.id.make_friends);
+        makeFoods = (LinearLayout) headerView.findViewById(R.id.make_foods);
+        makeActivity = (LinearLayout) headerView.findViewById(R.id.make_activity);
         /**
          * 热门列表
          */
@@ -108,18 +114,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         makeFriends.setOnClickListener(this);
         makeFoods.setOnClickListener(this);
         makeActivity.setOnClickListener(this);
-        mListView.setOnItemClickListener(this);
+        mListView.getRefreshableView().setOnItemClickListener(this);
+        mListView.setOnRefreshListener(this);
     }
 
     @Override
     public void onInitData() {
         HashMap bannerParams = new HashMap();
-        HttpRequestUtils.getmInstance(getActivity()).send(Constant.BANNER_URL, bannerParams, mCallBack);
+        HttpRequestUtils.getmInstance().send(getActivity(), Constant.BANNER_URL, bannerParams, mCallBack);
+        initData();
+    }
 
+    private void initData() {
         HashMap hotParams = new HashMap();
         hotParams.put("ResourceType", 1);
-
-        HttpRequestUtils.getmInstance(getActivity()).send(Constant.HOME_HOTS_URL, hotParams, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(getActivity(), Constant.HOME_HOTS_URL, hotParams, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBeans<HotLists> appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBeans<HotLists>>() {
@@ -127,6 +136,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 if (appBean != null && appBean.getEnumcode() == 0) {
                     mDatas.addAll(appBean.getData());
                     mAdapter.notifyDataSetChanged();
+                    mListView.onRefreshComplete();
                 }
             }
         });
@@ -150,8 +160,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        mDatas.clear();
+        initData();
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int oid = mDatas.get(position).getId();
+        Log.e("position", ">>>>" + position);
+        int oid = mDatas.get(position - 2).getId();
         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
         intent.putExtra("OID", oid);
         startActivity(intent);
@@ -172,6 +194,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 mViewPager.setAdapter(pagerAdapter);
                 mViewPager.setOnPageChangeListener(pagerAdapter);
                 pagerAdapter.refreshData(true);
+                mListView.onRefreshComplete();
             }
         }
 
@@ -192,5 +215,4 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onDestroy();
         mViewPager.stopAutoScroll();
     }
-
 }

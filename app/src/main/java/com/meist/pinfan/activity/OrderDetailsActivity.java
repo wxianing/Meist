@@ -57,7 +57,7 @@ public class OrderDetailsActivity extends BaseActivity {
         super.onInitData();
         HashMap params = new HashMap();
         params.put("Id", oid);
-        HttpRequestUtils.getmInstance(OrderDetailsActivity.this).send(Constant.ORDER_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(OrderDetailsActivity.this,Constant.ORDER_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 appBean = JSONObject.parseObject(result, new TypeReference<AppBean<OrderDetails>>() {
