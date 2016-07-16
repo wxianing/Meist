@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,12 +32,15 @@
             android:layout_gravity="center"
             android:text="头像" />
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <com.meist.pinfan.view.CircleImageView
+            android:id="@+id/header_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignParentRight="true"
-            android:scaleType="fitXY"
-            android:src="@mipmap/header_boy_icon" />
+            android:layout_margin="@dimen/dp5"
+            android:src="@mipmap/hugh"
+            app:civ_border_color="@color/dark"
+            app:civ_border_width="2dp" />
     </RelativeLayout>
 
     <include layout="@layout/horizontal_line" />

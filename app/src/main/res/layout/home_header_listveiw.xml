@@ -6,7 +6,9 @@
 
     <include layout="@layout/auto_viewpager" />
 
-    <include layout="@layout/home_navigation_layout" />
+    <include
+        layout="@layout/home_navigation_layout"
+        android:visibility="gone" />
 
     <include layout="@layout/home_hots_layout" />
 

@@ -17,6 +17,7 @@ import com.meist.pinfan.activity.MyCollectActivity;
 import com.meist.pinfan.activity.MyOrderActivity;
 import com.meist.pinfan.activity.MyRedpacketActivity;
 import com.meist.pinfan.activity.PersonCenterActivity;
+import com.meist.pinfan.activity.PersonalShowActivity;
 import com.meist.pinfan.activity.PresentActivity;
 import com.meist.pinfan.activity.ResetPwdActivity;
 import com.meist.pinfan.model.User;
@@ -35,7 +36,8 @@ import org.xutils.view.annotation.ViewInject;
  */
 @ContentView(R.layout.fragment_my)
 public class MyFragment extends BaseFragment {
-
+    @ViewInject(R.id.back_arrows)
+    private ImageView backImg;
     @ViewInject(R.id.title_tv)
     private TextView title;
     @ViewInject(R.id.nick_name)
@@ -55,7 +57,7 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void onInitView() {
-        super.onInitView();
+        backImg.setVisibility(View.GONE);
         title.setText("个人中心");
 
     }
@@ -76,7 +78,7 @@ public class MyFragment extends BaseFragment {
         phoneNum.setText("电话号码: " + SharedPreferencesUtils.getStringData(getActivity(), "PHONE", null));
     }
 
-    @Event(value = {R.id.mypurse_layout, R.id.mycollect_layout, R.id.my_order, R.id.get_present, R.id.send_present, R.id.logout, R.id.reset_password, R.id.person_center})
+    @Event(value = {R.id.mypurse_layout, R.id.mycollect_layout, R.id.my_order, R.id.get_present, R.id.send_present, R.id.logout, R.id.reset_password, R.id.person_center, R.id.person_groud})
     private void click(View v) {
         Intent intent = null;
         switch (v.getId()) {
@@ -121,6 +123,10 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.person_center://个人中心
                 startActivity(new Intent(getActivity(), PersonCenterActivity.class));
+                break;
+            case R.id.person_groud:
+                intent = new Intent(getActivity(), PersonalShowActivity.class);
+                startActivity(intent);
                 break;
 
         }

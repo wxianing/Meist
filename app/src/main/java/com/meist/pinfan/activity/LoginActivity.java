@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         mCallBack = new HttpCallBack();
         //自动登录
         boolean isLogin = SharedPreferencesUtils.getLoginTag(this);
-        if (false) {
+        if (isLogin) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }

@@ -15,6 +15,7 @@ public class Constant {
     public static final String APPID = "102";
     //    public static final String CODE = SharedPreferencesUtils.getUser(MyApplication.getmInstance()).getCode();
     public static final String CODE = SharedPreferencesUtils.getStringData(MyApplication.getmInstance(), "CODE", null);
+
     public static final String LOGIN_URL = BASE_URL + "common/user/login";
     public static final String BANNER_URL = BASE_URL + "article/advertise/getlist";
     //注册

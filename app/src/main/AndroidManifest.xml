@@ -47,7 +47,14 @@
         <activity android:name=".activity.RedPackageActivity" />
         <activity android:name=".activity.ProduceCommentActivity" />
         <activity android:name=".activity.PublishCommentActivity" />
-        <activity android:name=".activity.ScanImgActivity"></activity>
+        <activity android:name=".activity.ScanImgActivity" />
+        <activity android:name=".activity.PublishActivity" />
+        <activity android:name=".activity.PersonalShowActivity" />
+        <activity android:name=".activity.PersonDynamicActivity" />
+        <activity android:name=".activity.ResortShopActivity" />
+        <activity android:name=".activity.InvitationDetailsActivity" />
+        <activity android:name=".activity.MostOnSaleActivity" />
+        <activity android:name=".activity.SearchActivity"></activity>
     </application>
 
 </manifest>

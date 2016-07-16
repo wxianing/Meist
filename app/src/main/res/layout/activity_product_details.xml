@@ -45,8 +45,20 @@
                     android:id="@+id/produce_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="川菜桌"
-                    android:textColor="@color/full_black" />
+                    android:padding="@dimen/dp10"
+                    android:text="名称"
+                    android:textSize="@dimen/sp16"
+                    android:textColor="@color/black" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <TextView
+                    android:id="@+id/introduct_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:text="简介"
+                    android:textColor="@color/gray_textcolor" />
 
                 <TextView
                     android:id="@+id/produce_price"

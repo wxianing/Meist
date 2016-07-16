@@ -12,26 +12,51 @@
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
 
-    <LinearLayout
-        android:layout_marginLeft="@dimen/dp5"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp5"
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="@dimen/dp5"
             android:id="@+id/shop_name"
-            android:textSize="@dimen/dp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="店名" />
+            android:text="店名"
+            android:textSize="@dimen/dp16" />
 
         <TextView
             android:id="@+id/address_tv"
-            android:layout_marginTop="@dimen/dp10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="地点" />
-    </LinearLayout>
+            android:layout_below="@id/shop_name"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="地点:" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/address_tv"
+            android:layout_marginTop="@dimen/dp10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评价:" />:
+
+            <RatingBar
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shop_name"
+                android:numStars="5"
+                android:rating="4.5"
+                android:stepSize="0.5" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

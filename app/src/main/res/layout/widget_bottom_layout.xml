@@ -13,16 +13,22 @@
         android:drawableTop="@mipmap/main_rg_home_icon"
         android:text="首页" />
 
+
+    <RadioButton
+        style="@style/mainRgStyle"
+        android:drawableTop="@mipmap/main_rg_message_icon"
+        android:text="吃货推荐" />
+
     <RadioButton
         style="@style/mainRgStyle"
         android:drawableTop="@mipmap/main_rg_class_icon"
         android:text="商家" />
 
-
     <RadioButton
         style="@style/mainRgStyle"
-        android:drawableTop="@mipmap/main_rg_message_icon"
-        android:text="消息" />
+        android:drawableTop="@mipmap/home_bottom_tab_icon_work_normal"
+        android:text="活动" />
+
 
     <RadioButton
         style="@style/mainRgStyle"

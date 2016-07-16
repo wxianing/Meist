@@ -30,21 +30,21 @@ public class ShopListAdapter extends BasicAdapter<ShopLists.DataListBean> {
     @Override
     public View createView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
-        if (convertView==null){
-            convertView = inflater.inflate(R.layout.item_shop_list_layout,parent,false);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_shop_list_layout, parent, false);
             vh = new ViewHolder(convertView);
             convertView.setTag(vh);
-        }else {
-             vh = (ViewHolder) convertView.getTag();
+        } else {
+            vh = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(mData.get(position).getPhoto(),vh.img, MyApplication.options);
-        vh.address.setText(mData.get(position).getAddress());
+        ImageLoader.getInstance().displayImage(mData.get(position).getPhoto(), vh.img, MyApplication.options);
+        vh.address.setText(mData.get(position).getAreaName() + "  " + mData.get(position).getAddress());
         vh.shopName.setText(mData.get(position).getStructureName());
 
         return convertView;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         @ViewInject(R.id.img)
         private ImageView img;
         @ViewInject(R.id.shop_name)
@@ -53,7 +53,7 @@ public class ShopListAdapter extends BasicAdapter<ShopLists.DataListBean> {
         private TextView address;
 
         public ViewHolder(View view) {
-            x.view().inject(this,view);
+            x.view().inject(this, view);
         }
     }
 }

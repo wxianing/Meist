@@ -120,4 +120,16 @@
     <color name="price_color">#0A8B0A</color>
     <color name="text_drakgreen">#67B9C0</color>
     <color name="line_color">#DBDBDB</color>
+
+    <color name="default_background_color">#F1F1F1</color>
+    <color name="dark">#FF222222</color>
+    <color name="light">#FFEEEEEE</color>
+
+    <color name="gray_line_color">#A7A7A7</color>
+
+    <color name="textcolor_gray">#7a7a7a</color>
+    <color name="textcolor_black">#343434</color>
+    <color name="textcolor_orange">#EC6000</color>
+    <color name="textcolor_blue">#00BAED</color>
+
 </resources>

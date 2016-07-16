@@ -1,42 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="@dimen/dp5"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:scaleType="fitXY"
-        android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher" />
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dp5">
 
     <LinearLayout
+        android:id="@+id/person_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp5"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp5">
 
-        <TextView
-            android:id="@+id/name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="香川风味" />
+        <com.meist.pinfan.view.CircleImageView
+            android:id="@+id/header_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/dp5"
+            android:src="@mipmap/hugh"
+            app:civ_border_color="@color/dark"
+            app:civ_border_width="2dp" />
 
-        <TextView
-            android:id="@+id/price_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="￥100起"
-            android:textColor="@color/text_drakgreen" />
+            android:layout_marginLeft="@dimen/dp10"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/order_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="预约人数：10人" />
+            <TextView
+                android:id="@+id/nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
+                android:text="胡汉三"
+                android:textSize="@dimen/sp14" />
+
+
+            <TextView
+
+                android:id="@+id/phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
+                android:text="2016-07-11"
+                android:textSize="@dimen/sp14" />
+
+        </LinearLayout>
     </LinearLayout>
 
+    <com.meist.pinfan.view.AutoAdjustHeightImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/default_img" />
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/dp10"
+        android:text="香川风味" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/dp5">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp5"
+            android:background="@drawable/home_linear_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:src="@mipmap/like_normal_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:text="99" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp5"
+            android:background="@drawable/home_linear_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:src="@mipmap/share_normal_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:text="分享" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_toLeftOf="@+id/share_linear"
+            android:background="@drawable/home_linear_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:src="@mipmap/comment_normal_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:text="108" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

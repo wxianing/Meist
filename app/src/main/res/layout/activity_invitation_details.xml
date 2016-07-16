@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meist.pinfan.activity.InvitationDetailsActivity">
+
+    <include layout="@layout/titlebar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_dynamic_list" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp5"
+                android:scaleType="fitXY"
+                android:src="@mipmap/person_groud_bg" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp5"
+                android:scaleType="fitXY"
+                android:src="@mipmap/p1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10"
+                    android:text="全部评论" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <include layout="@layout/item_comment_list" />
+
+                <include layout="@layout/horizontal_line" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

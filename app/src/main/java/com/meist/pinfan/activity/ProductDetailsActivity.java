@@ -48,7 +48,9 @@ public class ProductDetailsActivity extends BaseActivity implements AdapterView.
     @ViewInject(R.id.banner_img)
     private AutoAdjustHeightImageView bannerImg;//头部图片
     @ViewInject(R.id.produce_name)
-    private TextView produceName;//商品名称
+    private TextView produceName;
+    @ViewInject(R.id.introduct_tv)
+    private TextView introduct;//商品名称
     @ViewInject(R.id.produce_price)
     private TextView producePrice;//商品价格
     @ViewInject(R.id.join_count)
@@ -86,6 +88,7 @@ public class ProductDetailsActivity extends BaseActivity implements AdapterView.
 
     @Override
     public void onInitView() {
+
         super.onInitView();
         title.setText("商品详情");
         oid = getIntent().getIntExtra("OID", 0);
@@ -141,6 +144,7 @@ public class ProductDetailsActivity extends BaseActivity implements AdapterView.
                 intent = new Intent(this, ProduceCommentActivity.class);
                 startActivity(intent);
                 break;
+
         }
     }
 
@@ -241,8 +245,8 @@ public class ProductDetailsActivity extends BaseActivity implements AdapterView.
     private void sendDataView(AppBean<ProductDetails> appBean) {
         int sexType = SharedPreferencesUtils.getIntData(this, "SEX", 0);
         ImageLoader.getInstance().displayImage(appBean.getData().getIcon(), bannerImg, MyApplication.options);
+        introduct.setText(appBean.getData().getIntroduct());
         produceName.setText(appBean.getData().getName());
-
         price = -1;
         switch (sexType) {
             case 1:

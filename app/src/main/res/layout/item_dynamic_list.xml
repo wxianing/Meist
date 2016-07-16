@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10">
+
+        <com.meist.pinfan.view.CircleImageView
+            android:id="@+id/header_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/dp5"
+            android:src="@mipmap/hugh"
+            app:civ_border_color="@color/dark"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="胡汉三"
+                android:textColor="@color/textcolor_black"
+                android:textSize="@dimen/sp16" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
+                android:text="2016-3-9 13:34" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:padding="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="生活是一种态度：凡事不必苛求，来了就来了；不必计较，过了就过了；遇事不要皱眉，笑了就笑了；结果不要强求，做了就对了。不要拒绝忙碌，因为它是一种充实；不要抱怨挫折，因为它使你坚强；不要恨爱过的人，所有结局都是新开始。生活是一种态度，心静了就平和了。不怕路长，只怕心老" />
+
+</LinearLayout>

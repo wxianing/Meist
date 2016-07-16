@@ -62,7 +62,6 @@ public class ShopFragment extends BaseFragment implements OnItemClickListener, P
         initData(pageIndex);
     }
 
-
     private void initView() {
         title.setText("商家");
         backImg.setVisibility(View.GONE);

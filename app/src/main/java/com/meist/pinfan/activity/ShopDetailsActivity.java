@@ -1,5 +1,6 @@
 package com.meist.pinfan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,10 +24,15 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.HashMap;
 
+/**
+ * 店铺详情
+ */
 @ContentView(R.layout.activity_shop_details)
 public class ShopDetailsActivity extends BaseActivity {
     @ViewInject(R.id.title_tv)
     private TextView title;
+    @ViewInject(R.id.title_right)
+    private TextView titleRight;
     private int oid;
     @ViewInject(R.id.banner_img)
     private ImageView bannerImg;
@@ -46,6 +52,8 @@ public class ShopDetailsActivity extends BaseActivity {
     @Override
     public void onInitView() {
         super.onInitView();
+        titleRight.setText("更多优惠");
+        titleRight.setVisibility(View.VISIBLE);
         title.setText("商家详情");
         oid = getIntent().getIntExtra("OID", 0);
     }
@@ -55,7 +63,7 @@ public class ShopDetailsActivity extends BaseActivity {
         super.onInitData();
         HashMap params = new HashMap();
         params.put("Id", oid);
-        HttpRequestUtils.getmInstance().send(ShopDetailsActivity.this,Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
+        HttpRequestUtils.getmInstance().send(ShopDetailsActivity.this, Constant.SHOP_DETAILS_URL, params, new HttpRequestListener() {
             @Override
             public void onSuccess(String result) {
                 AppBean<ShopDetails> appBean = com.alibaba.fastjson.JSONObject.parseObject(result, new TypeReference<AppBean<ShopDetails>>() {
@@ -74,11 +82,16 @@ public class ShopDetailsActivity extends BaseActivity {
         linkPhone.setText("联系电话:" + data.getPhone());
     }
 
-    @Event(value = {R.id.back_arrows})
+    @Event(value = {R.id.back_arrows, R.id.title_right})
     private void click(View v) {
         switch (v.getId()) {
             case R.id.back_arrows:
                 finish();
+                break;
+            case R.id.title_right:
+                Intent intent = new Intent();
+                intent.setClass(this, MostOnSaleActivity.class);
+                startActivity(intent);
                 break;
         }
     }

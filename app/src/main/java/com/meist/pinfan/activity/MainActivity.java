@@ -10,9 +10,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.meist.pinfan.R;
+import com.meist.pinfan.fragment.GamesFragment;
 import com.meist.pinfan.fragment.HomeFragment;
 import com.meist.pinfan.fragment.MessFragment;
 import com.meist.pinfan.fragment.MyFragment;
+import com.meist.pinfan.fragment.RecommendFragment;
 import com.meist.pinfan.fragment.ShopFragment;
 
 import org.xutils.view.annotation.ContentView;
@@ -29,10 +31,12 @@ import java.util.List;
  */
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+
     @ViewInject(R.id.main_bottom_rg)
     private RadioGroup mRadioGroup;
     private List<Fragment> mFragments;
     private FragmentManager manager;
+
     private long exitTime = 0;
     public static MainActivity mainActivity;
 
@@ -47,9 +51,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onInitView() {
         mFragments = new ArrayList<>();
         mFragments.add(new HomeFragment());
+        mFragments.add(new RecommendFragment());
         mFragments.add(new ShopFragment());
-
-        mFragments.add(new MessFragment());
+        mFragments.add(new GamesFragment());
         mFragments.add(new MyFragment());
         ((RadioButton) mRadioGroup.getChildAt(0)).setChecked(true);
         manager = getSupportFragmentManager();

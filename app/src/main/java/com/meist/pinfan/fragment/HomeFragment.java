@@ -1,6 +1,5 @@
 package com.meist.pinfan.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.android.volley.VolleyError;
@@ -19,7 +17,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.meist.pinfan.R;
 import com.meist.pinfan.activity.CaixiListActivity;
+import com.meist.pinfan.activity.InvitationDetailsActivity;
 import com.meist.pinfan.activity.ProductDetailsActivity;
+import com.meist.pinfan.activity.PublishActivity;
+import com.meist.pinfan.activity.SearchActivity;
 import com.meist.pinfan.adapter.HomeHotAdapter;
 import com.meist.pinfan.adapter.ImagePagerAdapter;
 import com.meist.pinfan.http.HttpRequestListener;
@@ -28,9 +29,11 @@ import com.meist.pinfan.model.AppBeans;
 import com.meist.pinfan.model.Banner;
 import com.meist.pinfan.model.HotLists;
 import com.meist.pinfan.utils.Constant;
+import com.meist.pinfan.utils.ToastUtils;
 import com.meist.pinfan.widget.AutoScrollViewPager;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -44,14 +47,9 @@ import java.util.List;
  * 时  间：2016/6/18
  */
 @ContentView(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements View.OnClickListener, PullToRefreshBase.OnRefreshListener2<ListView>, AdapterView.OnItemClickListener {
+public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2<ListView>, AdapterView.OnItemClickListener {
 
     private static final String TAG = "HomeFragment";
-
-    @ViewInject(R.id.title_tv)
-    private TextView title;
-    @ViewInject(R.id.back_arrows)
-    private ImageView backImg;
 
     private CallBack mCallBack;
     /**
@@ -61,12 +59,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     protected LinearLayout dotLL;
     private List<Banner> imageUrls;
     private ImagePagerAdapter pagerAdapter;
-    /**
-     * 中间导航栏
-     */
-    private LinearLayout makeFriends;
-    private LinearLayout makeFoods;
-    private LinearLayout makeActivity;
+
 
     /**
      * 热门列表
@@ -87,19 +80,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onInitView() {
-        title.setText("首页");
-        backImg.setVisibility(View.GONE);
         mCallBack = new CallBack();
         imageUrls = new ArrayList<>();
         View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.home_header_listveiw, null);
-//        x.view().inject(getActivity(), headerView);
         mListView.getRefreshableView().addHeaderView(headerView);
 
         mViewPager = (AutoScrollViewPager) headerView.findViewById(R.id.home_banner_viewpager);
         dotLL = (LinearLayout) headerView.findViewById(R.id.home_dot_ll);
-        makeFriends = (LinearLayout) headerView.findViewById(R.id.make_friends);
-        makeFoods = (LinearLayout) headerView.findViewById(R.id.make_foods);
-        makeActivity = (LinearLayout) headerView.findViewById(R.id.make_activity);
         /**
          * 热门列表
          */
@@ -111,9 +98,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onInitEvent() {
         super.onInitEvent();
-        makeFriends.setOnClickListener(this);
-        makeFoods.setOnClickListener(this);
-        makeActivity.setOnClickListener(this);
         mListView.getRefreshableView().setOnItemClickListener(this);
         mListView.setOnRefreshListener(this);
     }
@@ -142,21 +126,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), CaixiListActivity.class);
+    @Event(value = {R.id.camera_img, R.id.scanningold_img, R.id.search_edittext})
+    private void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
-            case R.id.make_friends://拼交友
-                intent.putExtra("sType", 1);
+            case R.id.camera_img:
+                ToastUtils.show(getActivity(), "发帖子");
+                intent.setClass(getActivity(), PublishActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.make_foods://拼美食
-                intent.putExtra("sType", 3);
+            case R.id.scanningold_img:
+                ToastUtils.show(getActivity(), "扫描二维码");
                 break;
-            case R.id.make_activity://拼活动
-                intent.putExtra("sType", 2);
+            case R.id.search_edittext:
+                intent.setClass(getActivity(), SearchActivity.class);
+                startActivity(intent);
                 break;
         }
-        startActivity(intent);
     }
 
     @Override
@@ -174,7 +160,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e("position", ">>>>" + position);
         int oid = mDatas.get(position - 2).getId();
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+//        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), InvitationDetailsActivity.class);
         intent.putExtra("OID", oid);
         startActivity(intent);
     }
