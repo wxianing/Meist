@@ -33,4 +33,5 @@ public class GamesFragment extends BaseFragment {
         backImg.setVisibility(View.GONE);
         title.setText("活动");
     }
+
 }

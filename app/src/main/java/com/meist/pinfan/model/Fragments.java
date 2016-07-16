@@ -14,7 +14,24 @@ public class Fragments {
 
     private String title;
 
-    private String tag;
+    public Fragments(Fragment fragment, String title) {
+        this.fragment = fragment;
+        this.title = title;
+    }
 
+    public Fragment getFragment() {
+        return fragment;
+    }
 
+    public void setFragment(Fragment fragment) {
+        this.fragment = fragment;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

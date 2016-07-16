@@ -33,6 +33,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
     compile 'com.squareup.okio:okio:1.8.0'
     compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:design:23.4.0'
     compile 'com.alibaba:fastjson:1.2.12'
+    compile 'com.android.support:design:24.0.0'
 }
