@@ -19,8 +19,6 @@ public class CommShopFragment extends BaseFragment {
 
 
     private String params;
-    @ViewInject(R.id.tv)
-    private TextView tv;
 
     public CommShopFragment() {
     }
@@ -43,6 +41,6 @@ public class CommShopFragment extends BaseFragment {
 
     @Override
     public void onInitView() {
-        tv.setText(params);
+//        tv.setText(params);
     }
 }
